@@ -15,3 +15,6 @@ INCLUDE_DIRECTORIES(${CE30_DRIVER_INCLUDE_DIRS})
 
 # These are IMPORTED targets created by ce30_driverTargets.cmake
 set(CE30_DRIVER_LIBRARIES ce30_driver)
+
+find_package(Boost)
+include_directories(${Boost_INCLUDE_DIRS})

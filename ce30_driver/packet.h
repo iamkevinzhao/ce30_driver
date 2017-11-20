@@ -5,9 +5,10 @@
 #include <chrono>
 #include <memory>
 #include <unordered_map>
+#include "export.h"
 
 namespace ce30_driver {
-struct Channel {
+struct API Channel {
   Channel();
   float distance;
   float amplitude;
@@ -15,21 +16,21 @@ struct Channel {
   static float DistanceMin();
 };
 
-struct Column {
+struct API Column {
   Column();
   float azimuth;
   std::vector<Channel> channels;
   static int ChannelNum();
 };
 
-struct ParsedPacket {
+struct API ParsedPacket {
   ParsedPacket();
   double time_stamp;
   std::vector<Column> columns;
   static int ColumnNum();
 };
 
-class Scan {
+class API Scan {
 public:
   Scan();
   void AddColumn(const Column& column);
@@ -50,13 +51,13 @@ private:
   std::unordered_map<int, Column> columns_;
 };
 
-struct PacketBase {
+struct API PacketBase {
   virtual ~PacketBase();
   std::chrono::high_resolution_clock::time_point stamp;
   std::vector<unsigned char> data;
 };
 
-struct Packet : public PacketBase {
+struct API Packet : public PacketBase {
   Packet();
 
   std::unique_ptr<ParsedPacket> Parse();
@@ -76,48 +77,48 @@ private:
   double ParseTimeStamp(std::vector<unsigned char> stamp_raw);
 };
 
-struct RequestPacket : public PacketBase {
+struct API RequestPacket : public PacketBase {
   RequestPacket();
   virtual ~RequestPacket();
   bool SetCmdString(const std::string& cmd);
   void ResetPacket();
 };
 
-struct VersionRequestPacket : public RequestPacket {
+struct API VersionRequestPacket : public RequestPacket {
   VersionRequestPacket();
 };
 
-struct VersionResponsePacket : public PacketBase {
+struct API VersionResponsePacket : public PacketBase {
   VersionResponsePacket();
   std::string GetVersionString() const;
 };
 
-struct SetIDRequestPacket : public RequestPacket {
+struct API SetIDRequestPacket : public RequestPacket {
   SetIDRequestPacket(const int& id);
 };
 
-struct SetIDResponsePacket : public PacketBase {
+struct API SetIDResponsePacket : public PacketBase {
   SetIDResponsePacket();
   bool Successful() const;
 };
 
-struct GetIDRequestPacket : public RequestPacket {
+struct API GetIDRequestPacket : public RequestPacket {
   GetIDRequestPacket();
 };
 
-struct GetIDResponsePacket : public PacketBase {
+struct API GetIDResponsePacket : public PacketBase {
   GetIDResponsePacket();
   int32_t ID() const;
 };
 
-struct StampSyncRequestPacket : public RequestPacket {
+struct API StampSyncRequestPacket : public RequestPacket {
   StampSyncRequestPacket(const uint32_t& microseconds);
 };
 
 // Identical Functionality
 using StampSyncResponsePacket = SetIDResponsePacket;
 
-struct StartRequestPacket : public RequestPacket {
+struct API StartRequestPacket : public RequestPacket {
   StartRequestPacket();
 };
 }

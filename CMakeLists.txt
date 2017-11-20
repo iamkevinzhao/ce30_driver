@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ce30_driver C CXX)
 
-SET(CMAKE_CXX_FLAGS "-std=c++0x")
+set(CMAKE_CXX_STANDARD 11)
 
 set(CE30_DRIVER_MAJOR_VERSION 0)
 set(CE30_DRIVER_MINOR_VERSION 1)

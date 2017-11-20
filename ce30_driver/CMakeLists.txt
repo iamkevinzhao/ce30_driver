@@ -1,16 +1,36 @@
 configure_file(config.h.in "${CMAKE_CURRENT_BINARY_DIR}/config.h" @ONLY)
 
+if(UNIX)
+  set(PLATFORM "unix")
+elseif(WIN32)
+  set(PLATFORM "win")
+else()
+  message(FATAL_ERROR "Unknown Platform")
+endif()
+
+find_package(Boost)
+include_directories(${Boost_INCLUDE_DIRS})
+
+IF(MSVC)
+    ADD_DEFINITIONS("/EHsc")
+ENDIF(MSVC)
+
+link_directories("C:/local/boost_1_65_0/lib64-msvc-14.0")
+
 add_library(
   ce30_driver
     SHARED
       utils.h
       utils.cpp
       config.h.in
+      ${PLATFORM}/udp_socket.cpp
       udp_socket.h
-      udp_socket.cpp
       packet.h
       packet.cpp
+      export.h
 )
+
+# target_link_libraries(ce30_driver)
 
 set(
   PUBLIC_HEADERS

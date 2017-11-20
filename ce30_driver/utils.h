@@ -3,11 +3,12 @@
 
 #include <vector>
 #include "udp_socket.h"
+#include "export.h"
 
 namespace ce30_driver {
-bool GetVersion(std::string& version, UDPSocket& socket);
-bool GetDeviceID(int& id, UDPSocket& socket);
-bool SetDeviceID(const int& id, UDPSocket& socket);
+bool API GetVersion(std::string& version, UDPSocket& socket);
+bool API GetDeviceID(int& id, UDPSocket& socket);
+bool API SetDeviceID(const int& id, UDPSocket& socket);
 }
 
 #endif // UTILS_H
