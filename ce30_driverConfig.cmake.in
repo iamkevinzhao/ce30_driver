@@ -1,0 +1,17 @@
+# - Config file for the ce30_driver package
+# It defines the following variables
+#  CE30_DRIVER_INCLUDE_DIRS - include directories for ce30_driver
+#  CE30_DRIVER_LIBRARIES    - libraries to link against
+#  CE30_DRIVER_EXECUTABLE   - the bar executable
+
+# Compute paths
+get_filename_component(CE30_DRIVER_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(CE30_DRIVER_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include("${CE30_DRIVER_CMAKE_DIR}/ce30_driverTargets.cmake")
+
+INCLUDE_DIRECTORIES(${CE30_DRIVER_INCLUDE_DIRS})
+
+# These are IMPORTED targets created by ce30_driverTargets.cmake
+set(CE30_DRIVER_LIBRARIES ce30_driver)

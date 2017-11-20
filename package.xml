@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>ce30_driver</name>
+  <version>0.0.0</version>
+  <description>Benewake CE30 Driver</description>
+  <maintainer email="bw@benewake.com">bw</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
