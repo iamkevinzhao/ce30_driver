@@ -24,7 +24,9 @@ add_library(
       utils.cpp
       config.h.in
       ${PLATFORM}/udp_socket.cpp
-      udp_socket.h
+      ${PLATFORM}/udp_socket.h
+      timed_udp_socket.cpp
+      timed_udp_socket.h
       packet.h
       packet.cpp
       export.h
@@ -35,7 +37,7 @@ add_library(
 set(
   PUBLIC_HEADERS
     utils.h
-    udp_socket.h
+    ${PLATFORM}/udp_socket.h
     packet.h
 )
 

@@ -18,3 +18,4 @@ set(CE30_DRIVER_LIBRARIES ce30_driver)
 
 find_package(Boost)
 include_directories(${Boost_INCLUDE_DIRS})
+link_directories("C:/local/boost_1_65_0/lib64-msvc-14.0")
