@@ -15,50 +15,48 @@ UDPSocket::UDPSocket(const std::string& ip, uint16_t port)
 }
 
 UDPSocket::~UDPSocket() {
+//  boost::shared_ptr<udp::socket> socket =
+//      boost::any_cast<boost::shared_ptr<udp::socket>>(properties_);
+//  socket->close();
 }
 
 Diagnose UDPSocket::Connect() {
-  boost::asio::io_service io_service;
-  boost::shared_ptr<udp::socket> socket(
-      new udp::socket(io_service, udp::endpoint(udp::v4(), port_)));
-  properties_ = socket;
+//  boost::asio::io_service io_service;
+//  boost::shared_ptr<udp::socket> socket(
+//      new udp::socket(io_service, udp::endpoint(udp::v4(), port_)));
+//  socket->open(udp::v4());
+//  properties_ = socket;
   return Diagnose::connect_successful;
 }
 
 Diagnose UDPSocket::GetPacket(PacketBase &pkt, const double time_offset) {
-  boost::shared_ptr<udp::socket> socket =
-      boost::any_cast<boost::shared_ptr<udp::socket>>(properties_);
-  boost::array<unsigned char, 1000> recv_buf;
-  udp::endpoint remote_endpoint;
-  boost::system::error_code error;
-  if (socket->receive_from(
-        boost::asio::buffer(recv_buf), remote_endpoint, 0, error) !=
-      pkt.data.size()) {
-    return Diagnose::unequal_buffer_size;
-  }
-  memcpy(&pkt.data[0], &recv_buf[0], pkt.data.size());
+//  boost::shared_ptr<udp::socket> socket =
+//      boost::any_cast<boost::shared_ptr<udp::socket>>(properties_);
+//  boost::array<unsigned char, 1000> recv_buf;
+//  udp::endpoint remote_endpoint;
+//  boost::system::error_code error;
+//  if (socket->receive_from(
+//        boost::asio::buffer(recv_buf), remote_endpoint, 0, error) !=
+//      pkt.data.size()) {
+//    return Diagnose::unequal_buffer_size;
+//  }
+//  memcpy(&pkt.data[0], &recv_buf[0], pkt.data.size());
   return Diagnose::receive_successful;
 }
 
 Diagnose UDPSocket::SendPacket(const PacketBase& packet) {
-  udp::endpoint endpoint;
+  boost::asio::io_service io_service;
+  udp::socket socket(io_service);
+  socket.open(udp::v4());
+  udp::endpoint remote_endpoint =
+      udp::endpoint(address::from_string(ip_), port_);
   try {
-    std::cout << port_ << std::endl;
-    // udp::endpoint endp(address::from_string(ip_), port_);
-    udp::endpoint endp(address)
-    std::cout << __LINE__ << std::endl;
-    endpoint = endp;
-    std::cout << __LINE__ << std::endl;
+    socket.send_to(
+        boost::asio::buffer(
+            &packet.data[0], packet.data.size()), remote_endpoint, 0);
   } catch (std::exception& e) {
-    std::cout << __LINE__ << std::endl;
-    std::cerr << e.what() << std::endl;
-    std::cout << __LINE__ << std::endl;
+    std::cerr << "Unable to Send Packet: " << e.what() << std::endl;
   }
-  boost::shared_ptr<udp::socket> socket =
-      boost::any_cast<boost::shared_ptr<udp::socket>>(properties_);
-  boost::array<unsigned char, 100> send_buf;
-  memcpy(&send_buf[0], &packet.data[0], packet.data.size());
-  socket->send_to(boost::asio::buffer(send_buf), endpoint);
   return Diagnose::send_successful;
 }
 } // namespace ce30_driver
