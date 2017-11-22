@@ -5,7 +5,7 @@
 #include <netinet/in.h>
 #include <string>
 #include <vector>
-#include "packet.h"
+#include "ce30_driver/packet.h"
 
 namespace ce30_driver {
 enum class Diagnose {
