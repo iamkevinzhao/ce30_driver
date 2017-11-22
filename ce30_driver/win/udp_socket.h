@@ -29,6 +29,10 @@ enum class API Diagnose {
   send_successful = 11,
   unequal_buffer_size = 12,
   insufficient_sent_size = 13,
+  connect_failed = 14,
+  no_prior_connection = 15,
+  unexcepted_packet_size = 16,
+  receive_error = 17,
 };
 
 class API UDPSocket
@@ -42,24 +46,8 @@ public:
   Diagnose SendPacket(const PacketBase& packet);
 
 private:
-  void HandleReceive(const boost::system::error_code& error, std::size_t);
-  void StartReceive();
   uint16_t port_;
   std::string ip_;
-
-  boost::asio::io_service io_service_;
-  boost::asio::ip::udp::socket socket_;
-  boost::asio::ip::udp::endpoint endpoint_;
-  boost::array<unsigned char, 1000> buffer_;
-  PacketBase packet_;
-
-  std::mutex receive_mutex_;
-  std::condition_variable receive_condition_;
-
-  std::mutex send_mutex_;
-  std::condition_variable send_condition_;
-
-  std::thread thread_;
 
   std::shared_ptr<TimedUDPSocket> timed_socket_;
 };

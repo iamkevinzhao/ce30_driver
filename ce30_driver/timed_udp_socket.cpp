@@ -6,11 +6,8 @@ namespace ce30_driver {
 TimedUDPSocket::TimedUDPSocket(
     const boost::asio::ip::udp::endpoint& listen_endpoint)
   : socket_(io_service_, listen_endpoint), deadline_(io_service_) {
-  std::cout << __LINE__ << std::endl;
   deadline_.expires_at(boost::posix_time::pos_infin);
-  std::cout << __LINE__ << std::endl;
   CheckDeadline();
-  std::cout << __LINE__ << std::endl;
 }
 std::size_t TimedUDPSocket::Receive(
     const boost::asio::mutable_buffer &buffer,
