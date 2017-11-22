@@ -14,10 +14,10 @@ bool GetVersion(std::string& version, UDPSocket& socket) {
       version = version_response.GetVersionString();
       return true;
     } else {
-      std::cerr << "'Get Version' not Responding\n";
+      cerr << "'Get Version' not Responding" << endl;
     }
   } else {
-    std::cerr << "Request 'Get Version' Failed\n";
+    cerr << "Request 'Get Version' Failed" << endl;
   }
   return false;
 }
@@ -32,10 +32,10 @@ bool GetDeviceID(int& id, UDPSocket& socket) {
       id = get_id_response.ID();
       return true;
     } else {
-      std::cerr << "'Get ID' not Responding\n";
+      cerr << "'Get ID' not Responding" << endl;
     }
   } else {
-    std::cerr << "Request 'Get ID' Failed\n";
+    cerr << "Request 'Get ID' Failed" << endl;
   }
   return false;
 }
@@ -47,12 +47,38 @@ bool SetDeviceID(const int& id, UDPSocket& socket) {
     SetIDResponsePacket set_id_response;
     diagnose = socket.GetPacket(set_id_response);
     if (diagnose == Diagnose::receive_successful) {
-      return true;
+      if (set_id_response.Successful()) {
+        return true;
+      } else {
+        cerr << "'Set ID' Failed" << endl;
+      }
     } else {
-      std::cerr << "'Set ID' not Responding\n";
+      cerr << "'Set ID' not Responding" << endl;
     }
   } else {
-    std::cerr << "Request 'Set ID' Failed\n";
+    cerr << "Request 'Set ID' Failed" << endl;
+  }
+  return false;
+}
+
+bool StartRunning(UDPSocket& socket) {
+  StartRequestPacket start_request;
+  auto diagnose = socket.SendPacket(start_request);
+  if (diagnose == Diagnose::send_successful) {
+    return true;
+  } else {
+    cerr << "Request 'Start' Failed" << endl;
+  }
+  return false;
+}
+
+bool StopRunning(UDPSocket& socket) {
+  StopRequestPacket stop_request;
+  auto diagnose = socket.SendPacket(stop_request);
+  if (diagnose == Diagnose::send_successful) {
+    return true;
+  } else {
+    cerr << "Request 'Stop' Failed" << endl;
   }
   return false;
 }

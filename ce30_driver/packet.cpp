@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <sstream>
+#include "utils.h"
 
 using namespace std;
 
@@ -265,10 +266,17 @@ string VersionResponsePacket::GetVersionString() const {
   return result;
 }
 
-SetIDRequestPacket::SetIDRequestPacket(const int& id) : RequestPacket() {
-  stringstream ss;
-  ss << hex << id;
-  SetCmdString("setLidarID " + ss.str());
+SetIDRequestPacket::SetIDRequestPacket(const int32_t& id) : RequestPacket() {
+  auto b4 = B4ToByteHexStrs<int32_t>(id);
+  if (b4.empty()) {
+    return;
+  }
+  string b4s;
+  for (auto& i : b4) {
+    b4s += i + " ";
+  }
+  b4s.erase(b4s.end() - 1);
+  SetCmdString("setLidarID " + b4s);
 }
 
 SetIDResponsePacket::SetIDResponsePacket() {
@@ -327,5 +335,9 @@ StampSyncRequestPacket::StampSyncRequestPacket(const uint32_t& microseconds)
 
 StartRequestPacket::StartRequestPacket() : RequestPacket() {
   SetCmdString("getDistanceAndAmplitudeSorted");
+}
+
+StopRequestPacket::StopRequestPacket() : RequestPacket() {
+  SetCmdString("join");
 }
 }

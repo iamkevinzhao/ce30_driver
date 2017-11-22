@@ -94,7 +94,7 @@ struct API VersionResponsePacket : public PacketBase {
 };
 
 struct API SetIDRequestPacket : public RequestPacket {
-  SetIDRequestPacket(const int& id);
+  SetIDRequestPacket(const int32_t& id);
 };
 
 struct API SetIDResponsePacket : public PacketBase {
@@ -120,6 +120,10 @@ using StampSyncResponsePacket = SetIDResponsePacket;
 
 struct API StartRequestPacket : public RequestPacket {
   StartRequestPacket();
+};
+
+struct API StopRequestPacket : public RequestPacket {
+  StopRequestPacket();
 };
 }
 
