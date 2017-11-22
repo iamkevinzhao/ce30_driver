@@ -5,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
+#include "ce30_driver/timed_udp_socket.h"
 
 using namespace std::chrono;
 using namespace boost::asio::ip;
@@ -20,8 +21,7 @@ UDPSocket::~UDPSocket() {
 
 Diagnose UDPSocket::Connect() {
   try {
-    udp::endpoint listen_endpoint(address::from_string(ip_), port_);
-    timed_socket_.reset(new TimedUDPSocket(listen_endpoint));
+    timed_socket_.reset(new TimedUDPSocket(udp::endpoint(address::from_string(ip_), port_)));
   } catch (const std::exception& e) {
     std::cerr << "UDPSocket Connection Error: " << e.what() << std::endl;
     return Diagnose::connect_failed;
@@ -47,6 +47,9 @@ Diagnose UDPSocket::GetPacket(PacketBase &pkt, const double time_offset) {
 }
 
 Diagnose UDPSocket::SendPacket(const PacketBase& packet) {
+  timed_socket_->GetSocket().send_to(
+        boost::asio::buffer(&packet.data[0], packet.data.size()),
+        timed_socket_->GetEndpoint());
   return Diagnose::send_successful;
 }
 } // namespace ce30_driver

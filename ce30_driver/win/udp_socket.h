@@ -6,12 +6,6 @@
 #include <vector>
 #include "ce30_driver/packet.h"
 #include "ce30_driver/export.h"
-#include <boost/asio.hpp>
-#include <boost/array.hpp>
-#include <mutex>
-#include <condition_variable>
-#include <thread>
-#include "ce30_driver/timed_udp_socket.h"
 
 namespace ce30_driver {
 enum class API Diagnose {
@@ -34,6 +28,8 @@ enum class API Diagnose {
   unexcepted_packet_size = 16,
   receive_error = 17,
 };
+
+class TimedUDPSocket;
 
 class API UDPSocket
 {
