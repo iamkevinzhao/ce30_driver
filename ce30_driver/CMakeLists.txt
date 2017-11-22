@@ -1,13 +1,5 @@
 configure_file(config.h.in "${CMAKE_CURRENT_BINARY_DIR}/config.h" @ONLY)
 
-if(UNIX)
-  set(PLATFORM "unix")
-elseif(WIN32)
-  set(PLATFORM "win")
-else()
-  message(FATAL_ERROR "Unknown Platform")
-endif()
-
 find_package(Boost)
 include_directories(${Boost_INCLUDE_DIRS})
 
@@ -23,8 +15,8 @@ add_library(
       utils.h
       utils.cpp
       config.h.in
-      ${PLATFORM}/udp_socket.cpp
-      ${PLATFORM}/udp_socket.h
+      udp_socket.cpp
+      udp_socket.h
       timed_udp_socket.cpp
       timed_udp_socket.h
       packet.h
@@ -37,7 +29,7 @@ add_library(
 set(
   PUBLIC_HEADERS
     utils.h
-    ${PLATFORM}/udp_socket.h
+    udp_socket.h
     packet.h
 )
 

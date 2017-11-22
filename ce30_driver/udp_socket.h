@@ -2,13 +2,13 @@
 #define INPUT_SOCKET_H
 
 #include <chrono>
-#include <netinet/in.h>
 #include <string>
 #include <vector>
 #include "ce30_driver/packet.h"
+#include "ce30_driver/export.h"
 
 namespace ce30_driver {
-enum class Diagnose {
+enum class API Diagnose {
   socket_error = 0,
   bind_error = 1,
   non_block_error = 2,
@@ -21,9 +21,17 @@ enum class Diagnose {
   device_connected = 9,
   send_fail = 10,
   send_successful = 11,
+  unequal_buffer_size = 12,
+  insufficient_sent_size = 13,
+  connect_failed = 14,
+  no_prior_connection = 15,
+  unexcepted_packet_size = 16,
+  receive_error = 17,
 };
 
-class UDPSocket
+class TimedUDPSocket;
+
+class API UDPSocket
 {
 public:
   UDPSocket(const std::string& ip = "192.168.1.80", uint16_t port = 2368);
@@ -34,10 +42,10 @@ public:
   Diagnose SendPacket(const PacketBase& packet);
 
 private:
-  int sockfd_;
-  in_addr devip_;
   uint16_t port_;
-  std::string devip_str_;
+  std::string ip_;
+
+  std::shared_ptr<TimedUDPSocket> timed_socket_;
 };
 } // namespace ce30_driver
 

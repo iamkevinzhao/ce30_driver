@@ -2,11 +2,7 @@
 #define UTILS_H
 
 #include <vector>
-#ifdef WIN32
-  #include "win/udp_socket.h"
-#else
-  #include "unix/udp_socket.h"
-#endif
+#include "udp_socket.h"
 #include "export.h"
 
 namespace ce30_driver {
