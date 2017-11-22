@@ -34,9 +34,11 @@ Diagnose UDPSocket::GetPacket(PacketBase &pkt, const double time_offset) {
     return Diagnose::no_prior_connection;
   }
   boost::system::error_code ec;
-  if (timed_socket_->Receive(
+  auto size_received =
+      timed_socket_->Receive(
           boost::asio::buffer(&pkt.data[0], pkt.data.size()),
-          boost::posix_time::seconds(1), ec) != pkt.data.size()) {
+          boost::posix_time::seconds(1), ec);
+  if (size_received != pkt.data.size()) {
     return Diagnose::unexcepted_packet_size;
   }
   if (ec) {
