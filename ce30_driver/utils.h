@@ -4,6 +4,7 @@
 #include <vector>
 #include "udp_socket.h"
 #include "export.h"
+#include <sstream>
 
 namespace ce30_driver {
 bool API GetVersion(std::string& version, UDPSocket& socket);
@@ -29,21 +30,21 @@ std::vector<std::string> B4ToByteHexStrs(const T& t) {
   T b1 = (t & 0x0000FF00) >> (8 * 1);
   T b0 = (t & 0x000000FF) >> (8 * 0);
 
-  stringstream ss;
+  std::stringstream ss;
 
-  ss << hex << b0;
+  ss << std::hex << b0;
   result[0] = ss.str();
   ss.str("");
 
-  ss << hex << b1;
+  ss << std::hex << b1;
   result[1] = ss.str();
   ss.str("");
 
-  ss << hex << b2;
+  ss << std::hex << b2;
   result[2] = ss.str();
   ss.str("");
 
-  ss << hex << b3;
+  ss << std::hex << b3;
   result[3] = ss.str();
 
   return result;

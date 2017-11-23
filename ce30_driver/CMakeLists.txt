@@ -31,6 +31,7 @@ set(
     utils.h
     udp_socket.h
     packet.h
+    export.h
 )
 
 set_target_properties(ce30_driver PROPERTIES
