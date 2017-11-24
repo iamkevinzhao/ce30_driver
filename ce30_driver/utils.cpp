@@ -86,4 +86,8 @@ bool StopRunning(UDPSocket& socket) {
 bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
 }
+
+bool GetPacket(PacketBase& packet, UDPSocket& socket) {
+  return socket.GetPacket(packet) == Diagnose::receive_successful;
+}
 }
