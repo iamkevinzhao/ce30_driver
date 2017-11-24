@@ -8,26 +8,29 @@
 #include "export.h"
 
 namespace ce30_driver {
+struct API Point {
+  Point();
+  Point(const float& x, const float& y, const float& z);
+  float x;
+  float y;
+  float z;
+};
+
 struct API Channel {
   Channel();
   float distance;
   float amplitude;
+  Point point() const;
   static float DistanceMax();
   static float DistanceMin();
-};
-
-struct API Point3f {
-  Point3f();
-  float x;
-  float y;
-  float z;
+  float h_azimuth;
+  float v_azimuth;
 };
 
 struct API Column {
   Column();
   float azimuth;
   std::vector<Channel> channels;
-  std::vector<Point3f> GetPoints() const;
   static int ChannelNum();
 };
 
@@ -55,6 +58,7 @@ public:
   static float FoV();
   static float AzimuthDelta();
   static int WhichColumn(const float& azimuth);
+  inline static float LookUpVerticalAzimuth(const int& i);
 private:
   std::unordered_map<int, Column> columns_;
 };

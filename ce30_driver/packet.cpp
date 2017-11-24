@@ -5,11 +5,31 @@
 #include <sstream>
 #include "utils.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+#define ToRad(x) x * M_PI / 180
+
 using namespace std;
 
 namespace ce30_driver {
+Point::Point() : Point(0.0f, 0.0f, 0.0f) {}
+
+Point::Point(const float& x, const float& y, const float& z) {
+  this->x = x;
+  this->y = y;
+  this->z = z;
+}
+
 Channel::Channel() : distance(0.0f), amplitude(0.0f) {
 
+}
+
+Point Channel::point() const {
+  return
+      Point(
+          distance * sin(ToRad(90.0f - v_azimuth)) * cos(ToRad(h_azimuth)),
+          distance * sin(ToRad(90.0f - v_azimuth) * sin(ToRad(h_azimuth))),
+          distance * cos(ToRad(90.0f - v_azimuth)));
 }
 
 float Channel::DistanceMax() {
@@ -20,15 +40,9 @@ float Channel::DistanceMin() {
   return 0.0f;
 }
 
-Point3f::Point3f() : x(0.0f), y(0.0f), z(0.0f) {}
-
 Column::Column() {
   azimuth = 0.0f;
   channels.resize(ChannelNum());
-}
-
-std::vector<Point3f> Column::GetPoints() const {
-  return vector<Point3f>(ChannelNum(), Point3f());
 }
 
 int Column::ChannelNum() {
@@ -172,6 +186,10 @@ unsigned char Packet::ColumnIdentifierLow() {
   return 0xEE;
 }
 
+float Scan::LookUpVerticalAzimuth(const int& i) {
+  return 1.9f - i * 0.2f;
+}
+
 std::unique_ptr<ParsedPacket> Packet::Parse() {
   std::unique_ptr<ParsedPacket> null_packet;
   std::unique_ptr<ParsedPacket> packet(new ParsedPacket);
@@ -186,6 +204,7 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
     auto azimuth_low = data[index++];
     auto azimuth_high = data[index++];
     col.azimuth = ParseAzimuth(azimuth_high, azimuth_low);
+    int chn_index = 0;
     for (auto& chn : col.channels) {
       auto dist_low = data[index++];
       auto dist_high = data[index++];
@@ -193,6 +212,9 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
 
       chn.distance = ParseDistance(dist_high, dist_low);
       chn.amplitude = ParseAmplitude(amp);
+
+      chn.h_azimuth = col.azimuth - Scan::FoV() / 2.0f;
+      chn.v_azimuth = Scan::LookUpVerticalAzimuth(chn_index++);
     }
   }
   vector<unsigned char> stamp_raw(4, 0);
