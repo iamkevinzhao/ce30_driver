@@ -20,9 +20,15 @@ float Channel::DistanceMin() {
   return 0.0f;
 }
 
+Point3f::Point3f() : x(0.0f), y(0.0f), z(0.0f) {}
+
 Column::Column() {
   azimuth = 0.0f;
   channels.resize(ChannelNum());
+}
+
+std::vector<Point3f> Column::GetPoints() const {
+  return vector<Point3f>(ChannelNum(), Point3f());
 }
 
 int Column::ChannelNum() {

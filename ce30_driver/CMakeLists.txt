@@ -22,6 +22,7 @@ add_library(
       packet.h
       packet.cpp
       export.h
+      ce30_driver.h
 )
 
 # target_link_libraries(ce30_driver)
@@ -32,6 +33,7 @@ set(
     udp_socket.h
     packet.h
     export.h
+    ce30_driver.h
 )
 
 set_target_properties(ce30_driver PROPERTIES

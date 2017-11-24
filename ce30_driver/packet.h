@@ -16,10 +16,18 @@ struct API Channel {
   static float DistanceMin();
 };
 
+struct API Point3f {
+  Point3f();
+  float x;
+  float y;
+  float z;
+};
+
 struct API Column {
   Column();
   float azimuth;
   std::vector<Channel> channels;
+  std::vector<Point3f> GetPoints() const;
   static int ChannelNum();
 };
 

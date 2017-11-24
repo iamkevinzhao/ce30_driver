@@ -17,6 +17,8 @@ bool API StartRunning(UDPSocket& socket);
 
 bool API StopRunning(UDPSocket& socket);
 
+bool API Connect(UDPSocket& socket);
+
 template<typename T>
 std::vector<std::string> B4ToByteHexStrs(const T& t) {
   std::vector<std::string> result(4, "");
