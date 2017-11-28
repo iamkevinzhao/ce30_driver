@@ -7,7 +7,11 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#define ToRad(x) x * M_PI / 180
+// #define ToRad(x) x * M_PI / 180
+
+inline static float ToRad(const float& x) {
+  return x * M_PI / 180;
+}
 
 using namespace std;
 
@@ -210,11 +214,17 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
       auto dist_high = data[index++];
       auto amp = data[index++];
 
+//      cout << hex << (short)dist_low << " " << (short)dist_high << endl;
+
       chn.distance = ParseDistance(dist_high, dist_low);
       chn.amplitude = ParseAmplitude(amp);
 
+//      cout << chn.distance << endl;
+
       chn.h_azimuth = col.azimuth - Scan::FoV() / 2.0f;
       chn.v_azimuth = Scan::LookUpVerticalAzimuth(chn_index++);
+
+//      cout << chn.h_azimuth << " " << chn.v_azimuth << endl;
     }
   }
   vector<unsigned char> stamp_raw(4, 0);
