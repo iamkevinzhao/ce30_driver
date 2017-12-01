@@ -7,7 +7,12 @@ IF(MSVC)
     ADD_DEFINITIONS("/EHsc")
 ENDIF(MSVC)
 
-link_directories("C:/local/boost_1_65_0/lib64-msvc-14.0")
+if ("${Boost_CUSTOMIZED_LIBRARYDIR}" STREQUAL "")
+  message("Using default Boost library directory")
+else()
+  message("Using customized Boost library directory")
+  link_directories("${Boost_CUSTOMIZED_LIBRARYDIR}")
+endif()
 
 add_library(
   ce30_driver
@@ -25,7 +30,7 @@ add_library(
       ce30_driver.h
 )
 
-# target_link_libraries(ce30_driver)
+# target_link_libraries(ce30_driver ${Boost_LIBRARIES})
 
 set(
   PUBLIC_HEADERS
