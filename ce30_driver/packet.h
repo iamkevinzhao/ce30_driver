@@ -109,10 +109,12 @@ struct API SetIDRequestPacket : public RequestPacket {
   SetIDRequestPacket(const int32_t& id);
 };
 
-struct API SetIDResponsePacket : public PacketBase {
-  SetIDResponsePacket();
+struct API CommonResponsePacket : public PacketBase {
+  CommonResponsePacket();
   bool Successful() const;
 };
+
+using SetIDResponsePacket = CommonResponsePacket;
 
 struct API GetIDRequestPacket : public RequestPacket {
   GetIDRequestPacket();
@@ -128,7 +130,7 @@ struct API StampSyncRequestPacket : public RequestPacket {
 };
 
 // Identical Functionality
-using StampSyncResponsePacket = SetIDResponsePacket;
+using StampSyncResponsePacket = CommonResponsePacket;
 
 struct API StartRequestPacket : public RequestPacket {
   StartRequestPacket();
@@ -137,6 +139,18 @@ struct API StartRequestPacket : public RequestPacket {
 struct API StopRequestPacket : public RequestPacket {
   StopRequestPacket();
 };
+
+struct API EnableFilterRequestPacket : public RequestPacket {
+  EnableFilterRequestPacket();
+};
+
+using EnableFilterResponsePacket = CommonResponsePacket;
+
+struct API DisableFilterRequestPacket : public RequestPacket {
+  DisableFilterRequestPacket();
+};
+
+using DisableFilterResponsePacket = CommonResponsePacket;
 }
 
 #endif // PACKET_H

@@ -21,6 +21,10 @@ bool API Connect(UDPSocket& socket);
 
 bool API GetPacket(PacketBase& packet, UDPSocket& socket);
 
+bool API EnableFilter(UDPSocket& socket);
+
+bool API DisableFilter(UDPSocket& socket);
+
 template<typename T>
 std::vector<std::string> B4ToByteHexStrs(const T& t) {
   std::vector<std::string> result(4, "");

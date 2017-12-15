@@ -317,11 +317,11 @@ SetIDRequestPacket::SetIDRequestPacket(const int32_t& id) : RequestPacket() {
   SetCmdString("setLidarID " + b4s);
 }
 
-SetIDResponsePacket::SetIDResponsePacket() {
+CommonResponsePacket::CommonResponsePacket() {
   data.resize(4, 0);
 }
 
-bool SetIDResponsePacket::Successful() const {
+bool CommonResponsePacket::Successful() const {
   int32_t result;
   memcpy(&result, &data[0], data.size());
   return result == 0;
@@ -377,5 +377,13 @@ StartRequestPacket::StartRequestPacket() : RequestPacket() {
 
 StopRequestPacket::StopRequestPacket() : RequestPacket() {
   SetCmdString("join");
+}
+
+EnableFilterRequestPacket::EnableFilterRequestPacket() : RequestPacket() {
+  SetCmdString("enableFeatures 104876");
+}
+
+DisableFilterRequestPacket::DisableFilterRequestPacket() : RequestPacket() {
+  SetCmdString("disableFeatures 104876");
 }
 }

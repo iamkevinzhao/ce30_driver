@@ -44,7 +44,7 @@ bool SetDeviceID(const int& id, UDPSocket& socket) {
   SetIDRequestPacket set_id_request(id);
   auto diagnose = socket.SendPacket(set_id_request);
   if (diagnose == Diagnose::send_successful) {
-    SetIDResponsePacket set_id_response;
+    CommonResponsePacket set_id_response;
     diagnose = socket.GetPacket(set_id_response);
     if (diagnose == Diagnose::receive_successful) {
       if (set_id_response.Successful()) {
@@ -79,6 +79,48 @@ bool StopRunning(UDPSocket& socket) {
     return true;
   } else {
     cerr << "Request 'Stop' Failed" << endl;
+  }
+  return false;
+}
+
+bool EnableFilter(UDPSocket& socket) {
+  EnableFilterRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    EnableFilterResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Enable Filter' Failed" << endl;
+      }
+    } else {
+      cerr << "'Enable Filter' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Enable Filter' Failed" << endl;
+  }
+  return false;
+}
+
+bool DisableFilter(UDPSocket& socket) {
+  DisableFilterRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    DisableFilterResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Disable Filter' Failed" << endl;
+      }
+    } else {
+      cerr << "'Disable Filter' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Disable Filter' Failed" << endl;
   }
   return false;
 }
