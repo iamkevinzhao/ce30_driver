@@ -7,7 +7,12 @@ IF(MSVC)
     ADD_DEFINITIONS("/EHsc")
 ENDIF(MSVC)
 
-link_directories("C:/local/boost_1_65_0/lib64-msvc-14.0")
+if ("${Boost_CUSTOMIZED_LIBRARYDIR}" STREQUAL "")
+  message("Using default Boost library directory")
+else()
+  message("Using customized Boost library directory")
+  link_directories("${Boost_CUSTOMIZED_LIBRARYDIR}")
+endif()
 
 add_library(
   ce30_driver
@@ -22,9 +27,10 @@ add_library(
       packet.h
       packet.cpp
       export.h
+      ce30_driver.h
 )
 
-# target_link_libraries(ce30_driver)
+# target_link_libraries(ce30_driver ${Boost_LIBRARIES})
 
 set(
   PUBLIC_HEADERS
@@ -32,6 +38,7 @@ set(
     udp_socket.h
     packet.h
     export.h
+    ce30_driver.h
 )
 
 set_target_properties(ce30_driver PROPERTIES
