@@ -3,12 +3,37 @@
 #include <iostream>
 #include <string.h>
 #include <sstream>
+#include "utils.h"
+
+#define _USE_MATH_DEFINES
+#include <math.h>
+// #define ToRad(x) x * M_PI / 180
+
+inline static float ToRad(const float& x) {
+  return x * M_PI / 180;
+}
 
 using namespace std;
 
 namespace ce30_driver {
+Point::Point() : Point(0.0f, 0.0f, 0.0f) {}
+
+Point::Point(const float& x, const float& y, const float& z) {
+  this->x = x;
+  this->y = y;
+  this->z = z;
+}
+
 Channel::Channel() : distance(0.0f), amplitude(0.0f) {
 
+}
+
+Point Channel::point() const {
+  return
+      Point(
+          distance * sin(ToRad(90.0f - v_azimuth)) * cos(ToRad(h_azimuth)),
+          distance * sin(ToRad(90.0f - v_azimuth)) * sin(ToRad(h_azimuth)),
+          distance * cos(ToRad(90.0f - v_azimuth)));
 }
 
 float Channel::DistanceMax() {
@@ -165,6 +190,10 @@ unsigned char Packet::ColumnIdentifierLow() {
   return 0xEE;
 }
 
+float Scan::LookUpVerticalAzimuth(const int& i) {
+  return 1.9f - i * 0.2f;
+}
+
 std::unique_ptr<ParsedPacket> Packet::Parse() {
   std::unique_ptr<ParsedPacket> null_packet;
   std::unique_ptr<ParsedPacket> packet(new ParsedPacket);
@@ -179,13 +208,23 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
     auto azimuth_low = data[index++];
     auto azimuth_high = data[index++];
     col.azimuth = ParseAzimuth(azimuth_high, azimuth_low);
+    int chn_index = 0;
     for (auto& chn : col.channels) {
       auto dist_low = data[index++];
       auto dist_high = data[index++];
       auto amp = data[index++];
 
+//      cout << hex << (short)dist_low << " " << (short)dist_high << endl;
+
       chn.distance = ParseDistance(dist_high, dist_low);
       chn.amplitude = ParseAmplitude(amp);
+
+//      cout << chn.distance << endl;
+
+      chn.h_azimuth = col.azimuth - Scan::FoV() / 2.0f;
+      chn.v_azimuth = Scan::LookUpVerticalAzimuth(chn_index++);
+
+//      cout << chn.h_azimuth << " " << chn.v_azimuth << endl;
     }
   }
   vector<unsigned char> stamp_raw(4, 0);
@@ -265,10 +304,17 @@ string VersionResponsePacket::GetVersionString() const {
   return result;
 }
 
-SetIDRequestPacket::SetIDRequestPacket(const int& id) : RequestPacket() {
-  stringstream ss;
-  ss << hex << id;
-  SetCmdString("setLidarID " + ss.str());
+SetIDRequestPacket::SetIDRequestPacket(const int32_t& id) : RequestPacket() {
+  auto b4 = B4ToByteHexStrs<int32_t>(id);
+  if (b4.empty()) {
+    return;
+  }
+  string b4s;
+  for (auto& i : b4) {
+    b4s += i + " ";
+  }
+  b4s.erase(b4s.end() - 1);
+  SetCmdString("setLidarID " + b4s);
 }
 
 SetIDResponsePacket::SetIDResponsePacket() {
@@ -327,5 +373,9 @@ StampSyncRequestPacket::StampSyncRequestPacket(const uint32_t& microseconds)
 
 StartRequestPacket::StartRequestPacket() : RequestPacket() {
   SetCmdString("getDistanceAndAmplitudeSorted");
+}
+
+StopRequestPacket::StopRequestPacket() : RequestPacket() {
+  SetCmdString("join");
 }
 }
