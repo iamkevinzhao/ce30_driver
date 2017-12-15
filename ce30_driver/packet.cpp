@@ -32,7 +32,7 @@ Point Channel::point() const {
   return
       Point(
           distance * sin(ToRad(90.0f - v_azimuth)) * cos(ToRad(h_azimuth)),
-          distance * sin(ToRad(90.0f - v_azimuth) * sin(ToRad(h_azimuth))),
+          distance * sin(ToRad(90.0f - v_azimuth)) * sin(ToRad(h_azimuth)),
           distance * cos(ToRad(90.0f - v_azimuth)));
 }
 
