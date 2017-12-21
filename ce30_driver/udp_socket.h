@@ -6,6 +6,7 @@
 #include <vector>
 #include "ce30_driver/packet.h"
 #include "ce30_driver/export.h"
+#include <mutex>
 
 namespace ce30_driver {
 enum class API Diagnose {
@@ -40,12 +41,15 @@ public:
   Diagnose Connect();
   Diagnose GetPacket(PacketBase& pkt, const double time_offset = 0.0);
   Diagnose SendPacket(const PacketBase& packet);
-
+  Diagnose SendPacketThreadSafe(const PacketBase& packet);
+  Diagnose GetPacketThreadSafe(PacketBase& pkt, const double time_offset = 0.0);
 private:
   uint16_t port_;
   std::string ip_;
 
   std::shared_ptr<TimedUDPSocket> timed_socket_;
+
+  std::mutex io_mutex_;
 };
 } // namespace ce30_driver
 

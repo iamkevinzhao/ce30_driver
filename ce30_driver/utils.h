@@ -19,7 +19,8 @@ bool API StopRunning(UDPSocket& socket);
 
 bool API Connect(UDPSocket& socket);
 
-bool API GetPacket(PacketBase& packet, UDPSocket& socket);
+bool API GetPacket(
+    PacketBase& packet, UDPSocket& socket, const bool& thread_safe = false);
 
 bool API EnableFilter(UDPSocket& socket);
 

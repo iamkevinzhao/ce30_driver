@@ -76,7 +76,14 @@ bool StopRunning(UDPSocket& socket) {
   StopRequestPacket stop_request;
   auto diagnose = socket.SendPacket(stop_request);
   if (diagnose == Diagnose::send_successful) {
-    return true;
+    Packet packet;
+    diagnose = socket.GetPacket(packet);
+    if (diagnose == Diagnose::receive_successful) {
+      // cerr << "Still Receving Packets though Stop Packet was Sent" << endl;
+      return false;
+    } else {
+      return true;
+    }
   } else {
     cerr << "Request 'Stop' Failed" << endl;
   }
@@ -129,7 +136,14 @@ bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
 }
 
-bool GetPacket(PacketBase& packet, UDPSocket& socket) {
-  return socket.GetPacket(packet) == Diagnose::receive_successful;
+bool GetPacket(
+    PacketBase& packet, UDPSocket& socket, const bool& thread_safe) {
+  Diagnose diagnose;
+  if (thread_safe) {
+    diagnose = socket.GetPacketThreadSafe(packet);
+  } else {
+    diagnose = socket.GetPacket(packet);
+  }
+  return diagnose == Diagnose::receive_successful;
 }
 }

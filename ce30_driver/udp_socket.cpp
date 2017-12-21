@@ -54,4 +54,19 @@ Diagnose UDPSocket::SendPacket(const PacketBase& packet) {
         timed_socket_->GetEndpoint());
   return Diagnose::send_successful;
 }
+
+Diagnose UDPSocket::SendPacketThreadSafe(const PacketBase &packet) {
+  io_mutex_.lock();
+  auto diagnose = SendPacket(packet);
+  io_mutex_.unlock();
+  return diagnose;
+}
+
+Diagnose UDPSocket::GetPacketThreadSafe(
+    PacketBase &pkt, const double time_offset) {
+  io_mutex_.lock();
+  auto diagnose = GetPacket(pkt, time_offset);
+  io_mutex_.unlock();
+  return diagnose;
+}
 } // namespace ce30_driver
