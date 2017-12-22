@@ -30,11 +30,11 @@ bool UDPServer::Start() {
   if (!Connect(*socket_)) {
     return false;
   }
-  if (!StartRunning(*socket_)) {
-    return false;
-  }
   string version;
   if (!GetVersion(version, *socket_)) {
+    return false;
+  }
+  if (!StartRunning(*socket_)) {
     return false;
   }
   thread_.reset(new thread(&UDPServer::DataReceiveThread, this));
