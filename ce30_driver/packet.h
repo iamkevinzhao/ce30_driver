@@ -6,16 +6,9 @@
 #include <memory>
 #include <unordered_map>
 #include "export.h"
+#include "data_types.h"
 
 namespace ce30_driver {
-struct API Point {
-  Point();
-  Point(const float& x, const float& y, const float& z);
-  float x;
-  float y;
-  float z;
-};
-
 struct API Channel {
   Channel();
   float distance;

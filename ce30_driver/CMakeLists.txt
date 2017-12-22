@@ -26,6 +26,10 @@ add_library(
       timed_udp_socket.h
       packet.h
       packet.cpp
+      udp_server.h
+      udp_server.cpp
+      data_types.h
+      data_types.cpp
       export.h
       ce30_driver.h
 )
@@ -39,6 +43,8 @@ set(
     packet.h
     export.h
     ce30_driver.h
+    data_types.h
+    udp_server.h
 )
 
 set_target_properties(ce30_driver PROPERTIES
