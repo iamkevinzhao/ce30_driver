@@ -9,6 +9,9 @@
 #include <mutex>
 
 namespace ce30_driver {
+/**
+ * @brief The Diagnose enum
+ */
 enum class API Diagnose {
   socket_error = 0,
   bind_error = 1,
@@ -32,16 +35,49 @@ enum class API Diagnose {
 
 class TimedUDPSocket;
 
+/**
+ * @brief UDP communication interface
+ */
 class API UDPSocket
 {
 public:
+  /**
+   * @brief constructor
+   * @param ip device IP
+   * @param port device port
+   */
   UDPSocket(const std::string& ip = "192.168.1.80", uint16_t port = 2368);
   ~UDPSocket();
-  Diagnose ConnectDevice();
+  /**
+   * @brief establish UDP socket
+   * @return socket diagnose
+   */
   Diagnose Connect();
+  /**
+   * @brief packet receiving interface
+   * @param pkt packet object
+   * @param time_offset time stamp offset [under development]
+   * @return socket diagnose
+   */
   Diagnose GetPacket(PacketBase& pkt, const double time_offset = 0.0);
+  /**
+   * @brief packet sending interface
+   * @param packet packet object
+   * @return socket diagnose
+   */
   Diagnose SendPacket(const PacketBase& packet);
+  /**
+   * @brief packet sending interface (thread safe)
+   * @param packet packet object
+   * @return socket diagnose
+   */
   Diagnose SendPacketThreadSafe(const PacketBase& packet);
+  /**
+   * @brief packet receiving interface (thread safe)
+   * @param pkt packet object
+   * @param time_offset time stamp offset [under development]
+   * @return socket diagnose
+   */
   Diagnose GetPacketThreadSafe(PacketBase& pkt, const double time_offset = 0.0);
 private:
   uint16_t port_;

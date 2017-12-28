@@ -90,6 +90,7 @@ bool StopRunning(UDPSocket& socket) {
   return false;
 }
 
+/// @cond DO_NOT_DOCUMENT_THIS
 bool EnableFilter(UDPSocket& socket) {
   EnableFilterRequestPacket request_packet;
   auto diagnose = socket.SendPacket(request_packet);
@@ -132,6 +133,8 @@ bool DisableFilter(UDPSocket& socket) {
   return false;
 }
 
+/// @endcond
+///
 bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
 }
