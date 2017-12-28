@@ -8,16 +8,39 @@
 #include "udp_socket.h"
 
 namespace ce30_driver {
+/**
+ * @brief device communication framework
+ */
 class API UDPServer
 {
 public:
+  /**
+   * @brief constructor
+   */
   UDPServer();
   virtual ~UDPServer();
+  /**
+   * @brief start server
+   * @return true is successful; otherwise, false
+   */
   bool Start();
+  /**
+   * @brief register measurement data receiver function
+   * @param callback the receiver function
+   */
   void RegisterCallback(
       std::function<void(std::shared_ptr<PointCloud>)> callback);
+  /**
+   * @brief spin server once
+   * @param millisec blocking time in milliseconds
+   */
   void SpinOnce(const int& millisec = 1000);
 protected:
+  /**
+   * @brief Default data receiver function
+   * @param pointcloud pointer to the incoming point cloud
+   * @remark the function won't be called after #RegisterCallback is called
+   */
   virtual void OnScanReceived(std::shared_ptr<PointCloud> pointcloud);
 private:
   void DataReceiveThread();

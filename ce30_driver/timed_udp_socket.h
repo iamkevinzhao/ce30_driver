@@ -3,6 +3,7 @@
 
 #include <boost/asio.hpp>
 
+/// @cond DO_NO_DOCUMENT_THIS
 namespace ce30_driver {
 class TimedUDPSocket
 {
@@ -27,5 +28,7 @@ private:
   boost::asio::ip::udp::endpoint listen_endpoint_;
 };
 }
+
+/// @endcond
 
 #endif // TIMED_UDP_SOCKET_H

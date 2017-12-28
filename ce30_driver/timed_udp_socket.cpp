@@ -4,6 +4,7 @@
 
 using namespace boost::asio::ip;
 
+/// @cond DO_NOT_DOCUMENT_THIS
 namespace ce30_driver {
 TimedUDPSocket::TimedUDPSocket(
     const udp::endpoint& listen_endpoint)
@@ -56,3 +57,5 @@ udp::endpoint TimedUDPSocket::GetEndpoint() {
   return listen_endpoint_;
 }
 }
+
+/// @endcond
