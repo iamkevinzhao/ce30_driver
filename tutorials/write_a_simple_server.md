@@ -53,7 +53,7 @@ Register a data receiver function. Every time there is a scan of point cloud dat
   }
 ```
 
-Start the server. Under the hood the server establishes a connect between host machine and the sensor device. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
+Start the server. Under the hood the server establishes a connection between the host machine and the sensor device. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
 
 ```c++
   while (true) {
@@ -61,7 +61,7 @@ Start the server. Under the hood the server establishes a connect between host m
   }
 ```
 
-Spin the server so that it can seize and parse incoming data packets. When a scan of point cloud data get ready, your receiver function which mentioned before will be invoked inside the `SpinOnce` routine. By default, `SpinOnce` blocks the thread for minimal one second (subject to change).
+Spin the server so that it can seize and parse incoming data packets. When a scan of point cloud data gets ready, your receiver function will be invoked inside the `SpinOnce` routine. By default, `SpinOnce` blocks the thread for minimal one second (subject to change).
 
 ```c++
 void DataReceiveCB(shared_ptr<PointCloud> cloud) {
@@ -71,4 +71,4 @@ void DataReceiveCB(shared_ptr<PointCloud> cloud) {
 }
 ```
 
-When the scan of point cloud is ready, it is passed through `std::shared_ptr` to your receiver function. An elementary member of `PointCloud` is `points`, an vector of `Point`. Note that `PointCloud` and `Point` are both defined by `ce30_driver` other than by any other third-party library. `Point` contains `x`, `y` and `z`, the Cartesian coordinates of the point in meter. Please refer to the [API documentation](../api_doc/html/index.html) for complete definitions of above-mentioned classes.
+When the scan of point cloud is ready, it is passed through `std::shared_ptr` to your receiver function. An elementary member of `PointCloud` is `points`, an vector of `Point`. Note that `PointCloud` and `Point` are both defined by `ce30_driver` other than by any other third-party library. `Point` contains `x`, `y` and `z`, the Cartesian coordinates of the point in meters. Please refer to the [API documentation](../api_doc/html/index.html) for complete definitions of above-mentioned classes.
