@@ -8,7 +8,7 @@ CE30-D adopts the User Dategram Protocol (UDP) to interchange data messages with
 
 
 
-If this is the first time you visit this site, we recommend you to go through this [tutorial](doc/tutorial_page). In the tutorials, we demonstrate how to obtain point cloud data in a super easy way. Also, we are going to step further to show how to manipulate command/data packet sending and receiving, which is for users with advanced purposes.
+If this is the first time you visit this site, we recommend you to go through this [tutorial](doc/tutorial_page). In the tutorials, we demonstrate how to obtain point cloud data in a super easy way. Also, we are going to step further to show how to manipulate command/data packet sending and receiving, which is for users with advanced purposes. If you have already done that and have been seeking for API documentations, click [here](api_doc/html/index.html).
 
 
 
