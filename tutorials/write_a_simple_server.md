@@ -53,7 +53,7 @@ Register a data receiver function. Every time there is a scan of point cloud dat
   }
 ```
 
-Start the server. Under the hood the server establishes a connection between the host machine and the sensor device. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
+Start the server. Under the hood the server establishes a UDP connection between the host machine and the sensor device and sends a start command to the sensor. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
 
 ```c++
   while (true) {
