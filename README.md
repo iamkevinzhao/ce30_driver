@@ -22,6 +22,8 @@ As `ce30_driver` is an open-source project, we are calling for contributions. Pl
 
 - [API Documentation](api_doc/html/index.html)
 
+- [ce30_viz](https://github.com/codincodee/ce30_viz)
+
 #### Version
 
 - v1.0.4
