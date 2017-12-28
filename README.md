@@ -8,3 +8,5 @@
 如需获取北醒的产品信息，请访问[企业主页](http://www.benewake.com)。
 
 感谢您对北醒的支持！
+
+[here](api_doc/html/index.html)
