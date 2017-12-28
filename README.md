@@ -9,4 +9,4 @@
 
 感谢您对北醒的支持！
 
-[here](api_doc/html/index.html)
+[here](pages/getting_started.md)
