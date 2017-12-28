@@ -8,11 +8,19 @@ CE30-D adopts the User Datagram Protocol (UDP) to interchange data messages with
 
 
 
-If this is your first time visiting the site, we recommend you to go through this [tutorial](tutorials/write_a_simple_server.md). In the tutorial, we demonstrate how to obtain point cloud data in a super easy way. Also, we step further to show how to manipulate data packet sending, receiving and parsing, which is for users with advanced purposes. If you have already done that and have been seeking for API documentations, click [here](api_doc/html/index.html).
+If this is your first time visiting the site, we recommend you going through this [tutorial](tutorials/write_a_simple_server.md). In the tutorial, we demonstrate how to obtain point cloud data in a super easy way. Also, we step further to show how to manipulate data packet sending, receiving and parsing, which is for users with advanced purposes. If you have already done that and have been seeking for API documentations, click [here](api_doc/html/index.html).
 
 
 
 As `ce30_driver` is an open-source project, we are calling for contributions. Please fork the project if you want to be a part of it. We appreciate any effort you make to perfect this project.
+
+#### Quick Access
+
+- [Official Website](http://www.benewake.com/en/index.html)
+
+- [Tutorial](tutorials/write_a_simple_server.md)
+
+- [API Documentation](api_doc/html/index.html)
 
 #### Version
 
