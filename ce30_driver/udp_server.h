@@ -16,6 +16,8 @@ class API UDPServer
 public:
   /**
    * @brief constructor
+   * @remark
+   * #UDPServer allows only one instance, or a std::exception will be thrown
    */
   UDPServer();
   virtual ~UDPServer();

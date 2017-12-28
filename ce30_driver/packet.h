@@ -9,14 +9,44 @@
 #include "data_types.h"
 
 namespace ce30_driver {
+/**
+ * @brief channel
+ */
 struct API Channel {
+  /**
+   * @brief constructor
+   */
   Channel();
+  /**
+   * @brief distance in meters
+   */
   float distance;
+  /**
+   * @brief amplitude
+   */
   float amplitude;
+  /**
+   * @brief get 3D point
+   * @return 3D point
+   */
   Point point() const;
+  /**
+   * @brief maximum distance
+   * @return distance in meters
+   */
   static float DistanceMax();
+  /**
+   * @brief minimum distance
+   * @return distance in meters
+   */
   static float DistanceMin();
+  /**
+   * @brief horizontal azimuth in degree
+   */
   float h_azimuth;
+  /**
+   * @brief vertical azimuth in degree
+   */
   float v_azimuth;
 };
 
