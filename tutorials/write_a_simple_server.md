@@ -53,15 +53,14 @@ Register a data receiver function. Every time there is a scan of point cloud dat
   }
 ```
 
-Start the server. Under the hood the server establishes a UDP connection between the host machine and the sensor device, then sends a start command to the sensor. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
-
+Start the server. Under the hood the server establishes a UDP connection between the host machine and the sensor device, and then sends a start command to the sensor. If everything goes smoothly, the function returns true; if any error that will disable further steps occurs during this process, the function returns false.
 ```c++
   while (true) {
    	server.SpinOnce();
   }
 ```
 
-Spin the server so that it can seize and parse incoming data packets. When a scan of point cloud data gets ready, your receiver function will be invoked inside the `SpinOnce` routine. By default, `SpinOnce` blocks the thread for minimal one second (subject to change).
+Spin the server so that it can seize and parse incoming data packets. When a scan of point cloud gets ready, your receiver function will be invoked inside the `SpinOnce` routine. By default, `SpinOnce` blocks the thread for minimal one second (subject to change).
 
 ```c++
 void DataReceiveCB(shared_ptr<PointCloud> cloud) {
