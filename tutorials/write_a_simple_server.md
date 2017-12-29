@@ -71,3 +71,7 @@ void DataReceiveCB(shared_ptr<PointCloud> cloud) {
 ```
 
 When the scan of point cloud is ready, it is passed through `std::shared_ptr` to your receiver function. An elementary member of `PointCloud` is `points`, an vector of `Point`. Note that `PointCloud` and `Point` are both defined by `ce30_driver` other than by any other third-party library. `Point` contains `x`, `y` and `z`, the Cartesian coordinates of the point in meters. Please refer to the [API documentation](../api_doc/html/index.html) for complete definitions of above-mentioned classes.
+
+
+
+[Next Tutorial: Using UDP Packets](using_udp_packets.md)

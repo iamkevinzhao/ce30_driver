@@ -111,7 +111,9 @@ bool EnableFilter(UDPSocket& socket) {
   }
   return false;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 bool DisableFilter(UDPSocket& socket) {
   DisableFilterRequestPacket request_packet;
   auto diagnose = socket.SendPacket(request_packet);
@@ -132,9 +134,8 @@ bool DisableFilter(UDPSocket& socket) {
   }
   return false;
 }
-
 /// @endcond
-///
+
 bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
 }
@@ -148,5 +149,16 @@ bool GetPacket(
     diagnose = socket.GetPacket(packet);
   }
   return diagnose == Diagnose::receive_successful;
+}
+
+bool SendPacket(
+    const PacketBase &packet, UDPSocket &socket, const bool &thread_safe) {
+  Diagnose diagnose;
+  if (thread_safe) {
+    diagnose = socket.SendPacketThreadSafe(packet);
+  } else {
+    diagnose = socket.SendPacket(packet);
+  }
+  return diagnose == Diagnose::send_successful;
 }
 }

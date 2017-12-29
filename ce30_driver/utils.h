@@ -58,18 +58,31 @@ bool API StopRunning(UDPSocket& socket);
 bool API Connect(UDPSocket& socket);
 
 /**
- * @brief get measurement data packet
- * @param[out] packet measurement data packet
+ * @brief receive packet
+ * @param[out] the receiver packet
  * @param socket UDP socket object
- * @param thread_safe if use thread safe mode
- * @return true if get packet; otherwise false
+ * @param thread_safe whether to use thread safe mode
+ * @return true if received the packet successfully; otherwise false
  */
 bool API GetPacket(
     PacketBase& packet, UDPSocket& socket, const bool& thread_safe = false);
 
+/**
+ * @brief send packet
+ * @param packet the packet to send
+ * @param socket UDP socket object
+ * @param thread_safe whether to use thread safe mode
+ * @return true if sent packet successfully; otherwise false
+ */
+bool API SendPacket(
+    const PacketBase& packet, UDPSocket& socket,
+    const bool& thread_safe = false);
+
 /// @cond DO_NO_DOCUMENT_THIS
 bool API EnableFilter(UDPSocket& socket);
-
+/// @endcond
+///
+/// @cond DO_NO_DOCUMENT_THIS
 bool API DisableFilter(UDPSocket& socket);
 /// @endcond
 
