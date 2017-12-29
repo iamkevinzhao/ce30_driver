@@ -26,7 +26,7 @@ int main() {
     if (parsed) {
       for (Column& column : parsed->columns) {
         for (Channel& channel : column.channels) {
-          // Print "[distance, amplitude] (x, y, z)"
+          // Print "(distance, amplitude) [x, y, z]"
           cout << 
               "(" << channel.distance << ", " << channel.amplitude << ") "
               "[" << 
