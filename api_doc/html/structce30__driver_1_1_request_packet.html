@@ -73,6 +73,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>the base class of all request types  
+ <a href="structce30__driver_1_1_request_packet.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="packet_8h_source.html">packet.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ce30_driver::RequestPacket:</div>
@@ -80,27 +83,27 @@ Inheritance diagram for ce30_driver::RequestPacket:</div>
  <div class="center">
   <img src="structce30__driver_1_1_request_packet.png" usemap="#ce30_5Fdriver::RequestPacket_map" alt=""/>
   <map id="ce30_5Fdriver::RequestPacket_map" name="ce30_5Fdriver::RequestPacket_map">
-<area href="structce30__driver_1_1_packet_base.html" alt="ce30_driver::PacketBase" shape="rect" coords="0,0,240,24"/>
-<area href="structce30__driver_1_1_disable_filter_request_packet.html" alt="ce30_driver::DisableFilterRequestPacket" shape="rect" coords="250,112,490,136"/>
-<area href="structce30__driver_1_1_enable_filter_request_packet.html" alt="ce30_driver::EnableFilterRequestPacket" shape="rect" coords="250,168,490,192"/>
-<area href="structce30__driver_1_1_get_i_d_request_packet.html" alt="ce30_driver::GetIDRequestPacket" shape="rect" coords="250,224,490,248"/>
-<area href="structce30__driver_1_1_set_i_d_request_packet.html" alt="ce30_driver::SetIDRequestPacket" shape="rect" coords="250,280,490,304"/>
-<area href="structce30__driver_1_1_stamp_sync_request_packet.html" alt="ce30_driver::StampSyncRequestPacket" shape="rect" coords="250,336,490,360"/>
-<area href="structce30__driver_1_1_start_request_packet.html" alt="ce30_driver::StartRequestPacket" shape="rect" coords="250,392,490,416"/>
-<area href="structce30__driver_1_1_stop_request_packet.html" alt="ce30_driver::StopRequestPacket" shape="rect" coords="250,448,490,472"/>
-<area href="structce30__driver_1_1_version_request_packet.html" alt="ce30_driver::VersionRequestPacket" shape="rect" coords="250,504,490,528"/>
+<area href="structce30__driver_1_1_packet_base.html" title="base class of all UDP packets " alt="ce30_driver::PacketBase" shape="rect" coords="446,0,659,24"/>
+<area href="structce30__driver_1_1_get_i_d_request_packet.html" title="packet of command for acquiring device ID " alt="ce30_driver::GetIDRequestPacket" shape="rect" coords="0,112,213,136"/>
+<area href="structce30__driver_1_1_set_i_d_request_packet.html" title="packet of command for setting device ID " alt="ce30_driver::SetIDRequestPacket" shape="rect" coords="223,112,436,136"/>
+<area href="structce30__driver_1_1_start_request_packet.html" title="packet of command for starting measuring " alt="ce30_driver::StartRequestPacket" shape="rect" coords="446,112,659,136"/>
+<area href="structce30__driver_1_1_stop_request_packet.html" title="packet of command for stopping measuring " alt="ce30_driver::StopRequestPacket" shape="rect" coords="669,112,882,136"/>
+<area href="structce30__driver_1_1_version_request_packet.html" title="packet of command for requesting device version " alt="ce30_driver::VersionRequestPacket" shape="rect" coords="892,112,1105,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abedccd1d9edc39a3651c82fc1248ac30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_request_packet.html#abedccd1d9edc39a3651c82fc1248ac30">RequestPacket</a> ()</td></tr>
+<tr class="memdesc:abedccd1d9edc39a3651c82fc1248ac30"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#abedccd1d9edc39a3651c82fc1248ac30">More...</a><br /></td></tr>
 <tr class="separator:abedccd1d9edc39a3651c82fc1248ac30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a167be558028792f027249c66dcef1791"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_request_packet.html#a167be558028792f027249c66dcef1791">~RequestPacket</a> ()</td></tr>
 <tr class="separator:a167be558028792f027249c66dcef1791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7a097fbc507576cc79ffc9b27dc9dab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_request_packet.html#ad7a097fbc507576cc79ffc9b27dc9dab">SetCmdString</a> (const std::string &amp;cmd)</td></tr>
+<tr class="memdesc:ad7a097fbc507576cc79ffc9b27dc9dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">set command string  <a href="#ad7a097fbc507576cc79ffc9b27dc9dab">More...</a><br /></td></tr>
 <tr class="separator:ad7a097fbc507576cc79ffc9b27dc9dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c8302d769c09d964fffe47be9073abc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_request_packet.html#a7c8302d769c09d964fffe47be9073abc">ResetPacket</a> ()</td></tr>
+<tr class="memdesc:a7c8302d769c09d964fffe47be9073abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset this packet  <a href="#a7c8302d769c09d964fffe47be9073abc">More...</a><br /></td></tr>
 <tr class="separator:a7c8302d769c09d964fffe47be9073abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structce30__driver_1_1_packet_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structce30__driver_1_1_packet_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structce30__driver_1_1_packet_base.html">ce30_driver::PacketBase</a></td></tr>
 <tr class="memitem:a479efb7355e7c0d7926ad3c8ac49b4f2 inherit pub_methods_structce30__driver_1_1_packet_base"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_packet_base.html#a479efb7355e7c0d7926ad3c8ac49b4f2">~PacketBase</a> ()</td></tr>
@@ -110,11 +113,15 @@ Public Member Functions</h2></td></tr>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_structce30__driver_1_1_packet_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structce30__driver_1_1_packet_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structce30__driver_1_1_packet_base.html">ce30_driver::PacketBase</a></td></tr>
 <tr class="memitem:a72da965f89d1bde48883feae61e3a052 inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="memItemLeft" align="right" valign="top">std::chrono::high_resolution_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_packet_base.html#a72da965f89d1bde48883feae61e3a052">stamp</a></td></tr>
+<tr class="memdesc:a72da965f89d1bde48883feae61e3a052 inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">time stamp when the packet is received  <a href="structce30__driver_1_1_packet_base.html#a72da965f89d1bde48883feae61e3a052">More...</a><br /></td></tr>
 <tr class="separator:a72da965f89d1bde48883feae61e3a052 inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37df9b9ca091163622b4545ad8d8969e inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_packet_base.html#a37df9b9ca091163622b4545ad8d8969e">data</a></td></tr>
+<tr class="memdesc:a37df9b9ca091163622b4545ad8d8969e inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">raw packet message in ASCIIs  <a href="structce30__driver_1_1_packet_base.html#a37df9b9ca091163622b4545ad8d8969e">More...</a><br /></td></tr>
 <tr class="separator:a37df9b9ca091163622b4545ad8d8969e inherit pub_attribs_structce30__driver_1_1_packet_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>the base class of all request types </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abedccd1d9edc39a3651c82fc1248ac30"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abedccd1d9edc39a3651c82fc1248ac30">&#9670;&nbsp;</a></span>RequestPacket()</h2>
 
@@ -129,6 +136,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>constructor </p>
 
 </div>
 </div>
@@ -173,6 +182,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>reset this packet </p>
+
 </div>
 </div>
 <a id="ad7a097fbc507576cc79ffc9b27dc9dab"></a>
@@ -191,11 +202,20 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>set command string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>the command string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the command string is valid; otherwise, false </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>ce30_driver/<a class="el" href="packet_8h_source.html">packet.h</a></li>
-<li>ce30_driver/<a class="el" href="packet_8cpp.html">packet.cpp</a></li>
+<li>C:/Users/codincodee/Documents/ce30_d/ce30_driver/ce30_driver/<a class="el" href="packet_8h_source.html">packet.h</a></li>
+<li>C:/Users/codincodee/Documents/ce30_d/ce30_driver/ce30_driver/<a class="el" href="packet_8cpp.html">packet.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -74,6 +74,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>base class of all UDP packets  
+ <a href="structce30__driver_1_1_packet_base.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="packet_8h_source.html">packet.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ce30_driver::PacketBase:</div>
@@ -81,19 +84,16 @@ Inheritance diagram for ce30_driver::PacketBase:</div>
  <div class="center">
   <img src="structce30__driver_1_1_packet_base.png" usemap="#ce30_5Fdriver::PacketBase_map" alt=""/>
   <map id="ce30_5Fdriver::PacketBase_map" name="ce30_5Fdriver::PacketBase_map">
-<area href="structce30__driver_1_1_common_response_packet.html" alt="ce30_driver::CommonResponsePacket" shape="rect" coords="0,56,240,80"/>
-<area href="structce30__driver_1_1_get_i_d_response_packet.html" alt="ce30_driver::GetIDResponsePacket" shape="rect" coords="250,56,490,80"/>
-<area href="structce30__driver_1_1_packet.html" alt="ce30_driver::Packet" shape="rect" coords="500,56,740,80"/>
-<area href="structce30__driver_1_1_request_packet.html" alt="ce30_driver::RequestPacket" shape="rect" coords="750,56,990,80"/>
-<area href="structce30__driver_1_1_version_response_packet.html" alt="ce30_driver::VersionResponsePacket" shape="rect" coords="1000,56,1240,80"/>
-<area href="structce30__driver_1_1_disable_filter_request_packet.html" alt="ce30_driver::DisableFilterRequestPacket" shape="rect" coords="1000,112,1240,136"/>
-<area href="structce30__driver_1_1_enable_filter_request_packet.html" alt="ce30_driver::EnableFilterRequestPacket" shape="rect" coords="1000,168,1240,192"/>
-<area href="structce30__driver_1_1_get_i_d_request_packet.html" alt="ce30_driver::GetIDRequestPacket" shape="rect" coords="1000,224,1240,248"/>
-<area href="structce30__driver_1_1_set_i_d_request_packet.html" alt="ce30_driver::SetIDRequestPacket" shape="rect" coords="1000,280,1240,304"/>
-<area href="structce30__driver_1_1_stamp_sync_request_packet.html" alt="ce30_driver::StampSyncRequestPacket" shape="rect" coords="1000,336,1240,360"/>
-<area href="structce30__driver_1_1_start_request_packet.html" alt="ce30_driver::StartRequestPacket" shape="rect" coords="1000,392,1240,416"/>
-<area href="structce30__driver_1_1_stop_request_packet.html" alt="ce30_driver::StopRequestPacket" shape="rect" coords="1000,448,1240,472"/>
-<area href="structce30__driver_1_1_version_request_packet.html" alt="ce30_driver::VersionRequestPacket" shape="rect" coords="1000,504,1240,528"/>
+<area href="structce30__driver_1_1_common_response_packet.html" title="meta class of common response packets " alt="ce30_driver::CommonResponsePacket" shape="rect" coords="0,56,228,80"/>
+<area href="structce30__driver_1_1_get_i_d_response_packet.html" title="response packet to the ID requeset " alt="ce30_driver::GetIDResponsePacket" shape="rect" coords="238,56,466,80"/>
+<area href="structce30__driver_1_1_packet.html" title="device measurement data packet " alt="ce30_driver::Packet" shape="rect" coords="476,56,704,80"/>
+<area href="structce30__driver_1_1_request_packet.html" title="the base class of all request types " alt="ce30_driver::RequestPacket" shape="rect" coords="714,56,942,80"/>
+<area href="structce30__driver_1_1_version_response_packet.html" title="packet of version information sent by the device " alt="ce30_driver::VersionResponsePacket" shape="rect" coords="952,56,1180,80"/>
+<area href="structce30__driver_1_1_get_i_d_request_packet.html" title="packet of command for acquiring device ID " alt="ce30_driver::GetIDRequestPacket" shape="rect" coords="238,112,466,136"/>
+<area href="structce30__driver_1_1_set_i_d_request_packet.html" title="packet of command for setting device ID " alt="ce30_driver::SetIDRequestPacket" shape="rect" coords="476,112,704,136"/>
+<area href="structce30__driver_1_1_start_request_packet.html" title="packet of command for starting measuring " alt="ce30_driver::StartRequestPacket" shape="rect" coords="714,112,942,136"/>
+<area href="structce30__driver_1_1_stop_request_packet.html" title="packet of command for stopping measuring " alt="ce30_driver::StopRequestPacket" shape="rect" coords="952,112,1180,136"/>
+<area href="structce30__driver_1_1_version_request_packet.html" title="packet of command for requesting device version " alt="ce30_driver::VersionRequestPacket" shape="rect" coords="1190,112,1418,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -105,11 +105,15 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a72da965f89d1bde48883feae61e3a052"><td class="memItemLeft" align="right" valign="top">std::chrono::high_resolution_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_packet_base.html#a72da965f89d1bde48883feae61e3a052">stamp</a></td></tr>
+<tr class="memdesc:a72da965f89d1bde48883feae61e3a052"><td class="mdescLeft">&#160;</td><td class="mdescRight">time stamp when the packet is received  <a href="#a72da965f89d1bde48883feae61e3a052">More...</a><br /></td></tr>
 <tr class="separator:a72da965f89d1bde48883feae61e3a052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37df9b9ca091163622b4545ad8d8969e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structce30__driver_1_1_packet_base.html#a37df9b9ca091163622b4545ad8d8969e">data</a></td></tr>
+<tr class="memdesc:a37df9b9ca091163622b4545ad8d8969e"><td class="mdescLeft">&#160;</td><td class="mdescRight">raw packet message in ASCIIs  <a href="#a37df9b9ca091163622b4545ad8d8969e">More...</a><br /></td></tr>
 <tr class="separator:a37df9b9ca091163622b4545ad8d8969e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>base class of all UDP packets </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a479efb7355e7c0d7926ad3c8ac49b4f2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a479efb7355e7c0d7926ad3c8ac49b4f2">&#9670;&nbsp;</a></span>~PacketBase()</h2>
 
@@ -148,6 +152,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>raw packet message in ASCIIs </p>
+
 </div>
 </div>
 <a id="a72da965f89d1bde48883feae61e3a052"></a>
@@ -162,11 +168,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>time stamp when the packet is received </p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>ce30_driver/<a class="el" href="packet_8h_source.html">packet.h</a></li>
-<li>ce30_driver/<a class="el" href="packet_8cpp.html">packet.cpp</a></li>
+<li>C:/Users/codincodee/Documents/ce30_d/ce30_driver/ce30_driver/<a class="el" href="packet_8h_source.html">packet.h</a></li>
+<li>C:/Users/codincodee/Documents/ce30_d/ce30_driver/ce30_driver/<a class="el" href="packet_8cpp.html">packet.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

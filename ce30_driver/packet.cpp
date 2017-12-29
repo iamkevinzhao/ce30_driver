@@ -130,6 +130,10 @@ int Scan::WhichColumn(const float& azimuth) {
   return -1;
 }
 
+float Scan::LookUpVerticalAzimuth(const int& i) {
+  return 1.9f - i * 0.2f;
+}
+
 PacketBase::~PacketBase() {}
 
 Packet::Packet() {
@@ -146,45 +150,59 @@ Packet::Packet() {
       0);
 }
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::HeaderBytes() {
   return 42;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::ColumnIdentifierBytes() {
   return 2;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::AzimuthBytes() {
   return 2;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::DistanceBytes() {
   return 2;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::AmplitudeBytes() {
   return 1;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::TimeStampBytes() {
   return 4;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 int Packet::FactoryBytes() {
   return 2;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 unsigned char Packet::ColumnIdentifierHigh() {
   return 0xFF;
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 unsigned char Packet::ColumnIdentifierLow() {
   return 0xEE;
 }
-
-float Scan::LookUpVerticalAzimuth(const int& i) {
-  return 1.9f - i * 0.2f;
-}
+/// @endcond
 
 std::unique_ptr<ParsedPacket> Packet::Parse() {
   std::unique_ptr<ParsedPacket> null_packet;
@@ -335,6 +353,7 @@ int32_t GetIDResponsePacket::ID() const {
   return id;
 }
 
+/// @cond DO_NOT_DOCUMENT_THIS
 StampSyncRequestPacket::StampSyncRequestPacket(const uint32_t& microseconds)
   : RequestPacket() {
   uint32_t b3 = (microseconds & 0xFF000000) >> (8 * 3);
@@ -362,6 +381,7 @@ StampSyncRequestPacket::StampSyncRequestPacket(const uint32_t& microseconds)
 
   SetCmdString(cmd);
 }
+/// @endcond DO_NOT_DOCUMENT_THIS
 
 StartRequestPacket::StartRequestPacket() : RequestPacket() {
   SetCmdString("getDistanceAndAmplitudeSorted");
@@ -371,11 +391,15 @@ StopRequestPacket::StopRequestPacket() : RequestPacket() {
   SetCmdString("join");
 }
 
+/// @cond DO_NOT_DOCUMENT_THIS
 EnableFilterRequestPacket::EnableFilterRequestPacket() : RequestPacket() {
   SetCmdString("enableFeatures 104876");
 }
+/// @endcond
 
+/// @cond DO_NOT_DOCUMENT_THIS
 DisableFilterRequestPacket::DisableFilterRequestPacket() : RequestPacket() {
   SetCmdString("disableFeatures 104876");
 }
+/// @endcond
 }
