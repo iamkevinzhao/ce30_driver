@@ -62,7 +62,7 @@ This program basically achieved the same function that the previous tutorial has
   }
 ```
 
-First, we instantiate a `UDPSocket` object and then connect to the device. We should handle the case where `Connect` returned `false`, because it will cause further operation failed.
+First, we instantiate a `UDPSocket` object and then create a connection with the device. We should handle the case where `Connect` returned `false`, because it will cause further operation failed.
 
 ```c++
   VersionRequestPacket version_request;
