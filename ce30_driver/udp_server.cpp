@@ -66,8 +66,8 @@ void UDPServer::DataReceiveThread() {
     }
     scan_mutex_.lock();
     scan_ = scan;
-    scan_mutex_.unlock();
     condition_.notify_all();
+    scan_mutex_.unlock();
     scan.Reset();
   }
 }
