@@ -6,6 +6,8 @@
 #include "export.h"
 #include <functional>
 #include "udp_socket.h"
+#include <thread>
+#include <condition_variable>
 
 namespace ce30_driver {
 /**

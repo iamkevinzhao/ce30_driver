@@ -3,6 +3,7 @@
 #include "utils.h"
 #include <chrono>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -95,7 +96,7 @@ void UDPServer::SpinOnce(const int& millisec) {
     for (int x = 0; x < scan.Width(); ++x) {
       for (int y = 0; y < scan.Height(); ++y) {
         Point p = scan.at(x, y).point();
-        if (sqrt(p.x * p.x + p.y * p.y) < 0.1f) {
+        if (sqrt(p.x * p.x + p.y * p.y) < 0.01f) {
           continue;
         }
         cloud->points.push_back(p);
