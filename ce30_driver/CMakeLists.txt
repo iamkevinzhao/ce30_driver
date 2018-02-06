@@ -14,6 +14,12 @@ else()
   link_directories("${Boost_CUSTOMIZED_LIBRARYDIR}")
 endif()
 
+if (WIN32)
+  add_definitions(-DUDP_SOCKET_USE_WINSOCK2_API)
+else()
+  add_definitions(-DUDP_SOCKET_USE_BOOST_API)
+endif()
+
 add_library(
   ce30_driver
     SHARED
@@ -21,6 +27,7 @@ add_library(
       utils.cpp
       config.h.in
       udp_socket.cpp
+      udp_socket_win_impl.cpp
       udp_socket.h
       timed_udp_socket.cpp
       timed_udp_socket.h
