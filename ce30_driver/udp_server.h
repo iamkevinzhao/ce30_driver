@@ -24,6 +24,20 @@ public:
   UDPServer();
   virtual ~UDPServer();
   /**
+   * @brief Set IP
+   * @param ip The IP
+   */
+  void SetIP(const std::string ip) {
+    ip_ = ip;
+  }
+  /**
+   * @brief Set Port
+   * @param port The port
+   */
+  void SetPort(const unsigned short& port) {
+    port_ = port;
+  }
+  /**
    * @brief start server
    * @return true is successful; otherwise, false
    */
@@ -57,6 +71,8 @@ private:
   std::mutex signal_mutex_;
   bool kill_signal_;
   std::condition_variable condition_;
+  std::string ip_;
+  unsigned short port_;
 };
 }
 #endif // UDP_SERVER_H

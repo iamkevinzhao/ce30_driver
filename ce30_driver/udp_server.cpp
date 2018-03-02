@@ -9,13 +9,12 @@ using namespace std;
 
 namespace ce30_driver {
 bool UDPServer::instance_running_ = false;
-UDPServer::UDPServer() : kill_signal_(false)
+UDPServer::UDPServer() : kill_signal_(false), ip_("192.168.1.80"), port_(2368)
 {
   if (instance_running_) {
     throw runtime_error("Only one instance of UDPServer is allowed!");
   }
   instance_running_ = true;
-  socket_.reset(new UDPSocket);
 }
 UDPServer::~UDPServer() {
   kill_signal_ = true;
@@ -28,6 +27,9 @@ UDPServer::~UDPServer() {
 }
 
 bool UDPServer::Start() {
+  if (!socket_) {
+    socket_.reset(new UDPSocket(ip_, port_));
+  }
   if (!Connect(*socket_)) {
     return false;
   }
