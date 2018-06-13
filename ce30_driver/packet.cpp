@@ -45,7 +45,7 @@ int Column::ChannelNum() {
   return 20;
 }
 
-ParsedPacket::ParsedPacket() {
+ParsedPacket::ParsedPacket() : grey_image(false) {
   time_stamp = 0.0;
   columns.resize(ColumnNum());
 }
@@ -204,9 +204,18 @@ unsigned char Packet::ColumnIdentifierLow() {
 }
 /// @endcond
 
+int Packet::GreyImageStatusIndex() {
+  return 16;
+}
+
+bool Packet::IsGreyImage(const char &grey_image_byte) {
+  return grey_image_byte & 0x02;
+}
+
 std::unique_ptr<ParsedPacket> Packet::Parse() {
   std::unique_ptr<ParsedPacket> null_packet;
   std::unique_ptr<ParsedPacket> packet(new ParsedPacket);
+  packet->grey_image = IsGreyImage(data[GreyImageStatusIndex()]);
   int index = HeaderBytes();
   for (auto& col : packet->columns) {
     if (data[index++] != ColumnIdentifierHigh()) {

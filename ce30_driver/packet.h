@@ -94,6 +94,8 @@ struct API ParsedPacket {
    * @return the number of columns
    */
   static int ColumnNum();
+
+  bool grey_image;
 };
 
 /**
@@ -232,6 +234,8 @@ struct API Packet : public PacketBase {
   inline static unsigned char ColumnIdentifierLow();
   /// @endcond
 private:
+  inline static int GreyImageStatusIndex();
+  static int IsGreyImage(const char& grey_image_byte);
   float ParseAzimuth(const unsigned char& high, const unsigned char& low);
   float ParseDistance(const unsigned char& high, const unsigned char& low);
   float ParseAmplitude(const unsigned char& raw);
