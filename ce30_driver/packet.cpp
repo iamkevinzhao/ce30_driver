@@ -267,7 +267,7 @@ float Packet::ParseDistance(
 }
 
 float Packet::ParseAmplitude(const unsigned char &raw) {
-  return 0.0f;
+  return raw;
 }
 
 double Packet::ParseTimeStamp(std::vector<unsigned char> stamp_raw) {
