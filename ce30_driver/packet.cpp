@@ -16,7 +16,8 @@ inline static float ToRad(const float& x) {
 using namespace std;
 
 namespace ce30_driver {
-Channel::Channel() : distance(0.0f), amplitude(0.0f) {
+Channel::Channel()
+  : distance(0.0f), amplitude(0.0f), grey_value(0) {
 
 }
 
@@ -34,6 +35,14 @@ float Channel::DistanceMax() {
 
 float Channel::DistanceMin() {
   return 0.0f;
+}
+
+unsigned short Channel::GreyValueMax() {
+  return 51200;
+}
+
+unsigned short Channel::GreyValueMin() {
+  return 16;
 }
 
 Column::Column() {
@@ -235,7 +244,11 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
 
 //      cout << hex << (short)dist_low << " " << (short)dist_high << endl;
 
-      chn.distance = ParseDistance(dist_high, dist_low);
+      if (packet->grey_image) {
+        chn.grey_value = ParseGreyValue(dist_high, dist_low);
+      } else {
+        chn.distance = ParseDistance(dist_high, dist_low);
+      }
       chn.amplitude = ParseAmplitude(amp);
 
 //      cout << chn.distance << endl;
@@ -273,6 +286,19 @@ float Packet::ParseDistance(
       max(
           Channel::DistanceMin(),
           min(float(d / 1000.0), Channel::DistanceMax()));
+}
+
+unsigned short Packet::ParseGreyValue(
+    const unsigned char &high, const unsigned char &low) {
+//  unsigned char value_uc[2];
+//  value_uc[0] = high;
+//  value_uc[1] = low;
+//  unsigned short value;
+//  memcpy(&value, value_uc, 2);
+  unsigned short value = high;
+  value = (value << 8);
+  value |= low;
+  return value;
 }
 
 float Packet::ParseAmplitude(const unsigned char &raw) {

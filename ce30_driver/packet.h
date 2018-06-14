@@ -21,6 +21,8 @@ struct API Channel {
    * @brief distance in meters
    */
   float distance;
+
+  unsigned short grey_value;
   /**
    * @brief amplitude
    */
@@ -40,6 +42,10 @@ struct API Channel {
    * @return distance in meters
    */
   static float DistanceMin();
+
+  static unsigned short GreyValueMax();
+
+  static unsigned short GreyValueMin();
   /**
    * @brief horizontal azimuth in degrees
    */
@@ -235,9 +241,10 @@ struct API Packet : public PacketBase {
   /// @endcond
 private:
   inline static int GreyImageStatusIndex();
-  static int IsGreyImage(const char& grey_image_byte);
+  static bool IsGreyImage(const char& grey_image_byte);
   float ParseAzimuth(const unsigned char& high, const unsigned char& low);
   float ParseDistance(const unsigned char& high, const unsigned char& low);
+  unsigned short ParseGreyValue(const unsigned char& high, const unsigned char& low);
   float ParseAmplitude(const unsigned char& raw);
   double ParseTimeStamp(std::vector<unsigned char> stamp_raw);
 };
