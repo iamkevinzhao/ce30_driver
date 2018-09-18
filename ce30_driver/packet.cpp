@@ -17,7 +17,7 @@ using namespace std;
 
 namespace ce30_driver {
 Channel::Channel()
-  : distance(0.0f), amplitude(0.0f), grey_value(0) {
+  : distance(0.0f), amplitude(0.0f), amp_raw(0), grey_value(0) {
 
 }
 
@@ -250,6 +250,7 @@ std::unique_ptr<ParsedPacket> Packet::Parse() {
         chn.distance = ParseDistance(dist_high, dist_low);
       }
       chn.amplitude = ParseAmplitude(amp);
+      chn.amp_raw = amp;
 
 //      cout << chn.distance << endl;
 

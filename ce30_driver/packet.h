@@ -28,6 +28,10 @@ struct API Channel {
    */
   float amplitude;
   /**
+    * @brief raw value of the amplitude byte
+    */
+  unsigned char amp_raw;
+  /**
    * @brief get 3D point
    * @return 3D point
    */
