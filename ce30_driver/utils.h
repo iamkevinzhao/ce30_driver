@@ -86,6 +86,10 @@ bool API EnableFilter(UDPSocket& socket);
 bool API DisableFilter(UDPSocket& socket);
 /// @endcond
 
+bool API EnableGrayOutput(UDPSocket& socket);
+
+bool API DisableGrayOutput(UDPSocket& socket);
+
 /// @cond DO_NOT_DOCUMENT_THIS
 template<typename T>
 std::vector<std::string> B4ToByteHexStrs(const T& t) {

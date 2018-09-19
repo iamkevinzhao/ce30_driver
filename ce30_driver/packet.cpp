@@ -21,6 +21,25 @@ Channel::Channel()
 
 }
 
+Channel::Type Channel::type() const {
+  switch (amp_raw) {
+  case 0x00: return Type::normal;
+  case 0x01: return Type::signal_high;
+  case 0x02: return Type::signal_low;
+  case 0x03: return Type::amb_high;
+  default: return Type::unknown;
+  }
+}
+
+int Channel::FullType() {
+  return
+      (int)Type::normal |
+      (int)Type::signal_high |
+      (int)Type::signal_low |
+      (int)Type::amb_high |
+      (int)Type::unknown;
+}
+
 Point Channel::point() const {
   return
       Point(
@@ -438,4 +457,14 @@ DisableFilterRequestPacket::DisableFilterRequestPacket() : RequestPacket() {
   SetCmdString("disableFeatures 104876");
 }
 /// @endcond
+
+EnableGrayOutputRequestPacket::EnableGrayOutputRequestPacket()
+  : RequestPacket() {
+  SetCmdString("enableGrayOutput 1");
+}
+
+DisableGrayOutputRequestPacket::DisableGrayOutputRequestPacket()
+  : RequestPacket() {
+  SetCmdString("enableGrayOutput 0");
+}
 }

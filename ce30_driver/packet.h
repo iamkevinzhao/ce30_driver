@@ -31,6 +31,16 @@ struct API Channel {
     * @brief raw value of the amplitude byte
     */
   unsigned char amp_raw;
+
+  enum class Type {
+    normal = 0b00000001,
+    signal_high = 0b00000010,
+    signal_low = 0b00000100,
+    amb_high = 0b00001000,
+    unknown = 0b00010000,
+  };
+  Type type() const;
+  static int FullType();
   /**
    * @brief get 3D point
    * @return 3D point
@@ -393,6 +403,18 @@ struct API DisableFilterRequestPacket : public RequestPacket {
 /// @endcond
 
 using DisableFilterResponsePacket = CommonResponsePacket;
+
+struct API EnableGrayOutputRequestPacket : public RequestPacket {
+  EnableGrayOutputRequestPacket();
+};
+
+using EnableGrayOutputResponsePacket = CommonResponsePacket;
+
+struct API DisableGrayOutputRequestPacket : public RequestPacket {
+  DisableGrayOutputRequestPacket();
+};
+
+using DisableGrayOutputResponsePacket = CommonResponsePacket;
 }
 
 #endif // PACKET_H

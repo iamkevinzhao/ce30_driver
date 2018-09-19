@@ -20,6 +20,21 @@ else()
   add_definitions(-DUDP_SOCKET_USE_BOOST_API)
 endif()
 
+find_package(Qt5Widgets)
+if (Qt5Widgets_FOUND)
+  add_definitions(-DQT5_WIDGETS_EXISTS)
+  set(QT5_LINK
+    Qt5::Widgets
+  )
+  set(QT5_DEPENDENT_SOURCE
+    channel_type_widgets.cpp
+    channel_type_widgets.h
+  )
+  set(QT5_DEPENDENT_HEADERS
+    channel_type_widgets.h
+  )
+endif()
+
 add_library(
   ce30_driver
     SHARED
@@ -39,9 +54,14 @@ add_library(
       data_types.cpp
       export.h
       ce30_driver.h
+      ${QT5_DEPENDENT_SOURCE}
 )
 
-# target_link_libraries(ce30_driver ${Boost_LIBRARIES})
+target_link_libraries(
+  ce30_driver
+    ${Boost_LIBRARIES}
+    ${QT5_LINK}
+)
 
 set(
   PUBLIC_HEADERS
@@ -52,6 +72,7 @@ set(
     ce30_driver.h
     data_types.h
     udp_server.h
+    ${QT5_DEPENDENT_HEADERS}
 )
 
 set_target_properties(ce30_driver PROPERTIES

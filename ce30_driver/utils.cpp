@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -135,6 +136,48 @@ bool DisableFilter(UDPSocket& socket) {
   return false;
 }
 /// @endcond
+
+bool EnableGrayOutput(UDPSocket &socket) {
+  EnableGrayOutputRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    EnableGrayOutputResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Enable Gray Output' Failed" << endl;
+      }
+    } else {
+      cerr << "'Enable Gray Output' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Enable Gray Output' Failed" << endl;
+  }
+  return false;
+}
+
+bool DisableGrayOutput(UDPSocket &socket) {
+  DisableGrayOutputRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    DisableGrayOutputResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Disable Gray Output' Failed" << endl;
+      }
+    } else {
+      cerr << "'Disable Gray Output' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Disable Gray Output' Failed" << endl;
+  }
+  return false;
+}
 
 bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
