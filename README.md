@@ -22,4 +22,4 @@ As `ce30_driver` is an open-source project, we are calling for contributions. Pl
 
 #### Version
 
-- v1.1.1
+- v1.2.0
