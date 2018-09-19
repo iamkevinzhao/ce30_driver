@@ -27,6 +27,7 @@ Channel::Type Channel::type() const {
   case 0x01: return Type::signal_high;
   case 0x02: return Type::signal_low;
   case 0x03: return Type::amb_high;
+  case 0x04: return Type::kicked_out;
   default: return Type::unknown;
   }
 }

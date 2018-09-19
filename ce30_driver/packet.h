@@ -37,7 +37,8 @@ struct API Channel {
     signal_high = 0b00000010,
     signal_low = 0b00000100,
     amb_high = 0b00001000,
-    unknown = 0b00010000,
+    kicked_out = 0b00010000,
+    unknown = 0b00100000,
   };
   Type type() const;
   static int FullType();

@@ -25,6 +25,11 @@ ChannelTypeWidgets::ChannelTypeWidgets(QWidget* parent)
   box->setText("High Ambient Channels");
   box->setChecked(true);
   check_boxes_[Channel::Type::amb_high] = box;
+
+  box = new QCheckBox(parent);
+  box->setText("Kicked-out Channels");
+  box->setChecked(true);
+  check_boxes_[Channel::Type::kicked_out] = box;
 }
 
 ChannelTypeWidgets::~ChannelTypeWidgets() {
