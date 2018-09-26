@@ -20,7 +20,7 @@ else()
   add_definitions(-DUDP_SOCKET_USE_BOOST_API)
 endif()
 
-find_package(Qt5Widgets)
+find_package(Qt5Widgets QUIET)
 if (Qt5Widgets_FOUND)
   add_definitions(-DQT5_WIDGETS_EXISTS)
   set(QT5_LINK
