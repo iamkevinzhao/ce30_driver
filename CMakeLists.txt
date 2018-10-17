@@ -37,12 +37,13 @@ include_directories(
 
 # Add sub-directories
 add_subdirectory(ce30_driver)
+add_subdirectory(ce30_demo)
 
 # The interesting stuff goes here
 # ===============================
 
 # Add all targets to the build-tree export set
-export(TARGETS ce30_driver
+export(TARGETS ce30_driver ce30_demo
   FILE "${PROJECT_BINARY_DIR}/ce30_driverTargets.cmake")
 
 # Export the package for use from the build-tree
