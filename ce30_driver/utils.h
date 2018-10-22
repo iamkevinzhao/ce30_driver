@@ -90,6 +90,8 @@ bool API EnableGrayOutput(UDPSocket& socket);
 
 bool API DisableGrayOutput(UDPSocket& socket);
 
+bool API SaveImages(const std::string& file, const Scan& scan);
+
 /// @cond DO_NOT_DOCUMENT_THIS
 template<typename T>
 std::vector<std::string> B4ToByteHexStrs(const T& t) {

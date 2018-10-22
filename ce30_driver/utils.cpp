@@ -1,6 +1,8 @@
 #include "utils.h"
 #include <iostream>
 #include <thread>
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -203,5 +205,44 @@ bool SendPacket(
     diagnose = socket.SendPacket(packet);
   }
   return diagnose == Diagnose::send_successful;
+}
+
+bool SaveImages(const string &file, const Scan &scan) {
+  ofstream os(file);
+  if (!os.is_open()) {
+    return false;
+  }
+  os << std::fixed << std::showpoint << std::setprecision(2);
+
+  os << "dist:\n";
+  float distance;
+  for (int row = 0; row < scan.Height(); ++row) {
+    for (int col = 0; col < scan.Width(); ++col) {
+      distance = scan.at(row, col).distance;
+      if (distance > Channel::DistanceMax() ||
+          distance < Channel::DistanceMin()) {
+        distance = 0.0f;
+      }
+      os << distance << " ";
+    }
+    os << "\n";
+  }
+  os << "\n";
+
+  os << "amp:\n";
+  float amp;
+  for (int row = 0; row < scan.Height(); ++row) {
+    for (int col = 0; col < scan.Width(); ++col) {
+      amp = scan.at(row, col).amplitude;
+      if (amp > Channel::AmplitudeMax() || amp < Channel::AmplitudeMin()) {
+        amp = 0.0f;
+      }
+      os << amp << " ";
+    }
+    os << "\n";
+  }
+  os << "\n";
+  os.close();
+  return true;
 }
 }

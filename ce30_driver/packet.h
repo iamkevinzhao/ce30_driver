@@ -58,6 +58,9 @@ struct API Channel {
    */
   static float DistanceMin();
 
+  static float AmplitudeMax();
+  static float AmplitudeMin();
+
   static unsigned short GreyValueMax();
 
   static unsigned short GreyValueMin();

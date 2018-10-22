@@ -57,6 +57,14 @@ float Channel::DistanceMin() {
   return 0.0f;
 }
 
+float Channel::AmplitudeMax() {
+  return 255.0f;
+}
+
+float Channel::AmplitudeMin() {
+  return 0.0f;
+}
+
 unsigned short Channel::GreyValueMax() {
   return 51200;
 }
