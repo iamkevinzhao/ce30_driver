@@ -476,4 +476,14 @@ DisableGrayOutputRequestPacket::DisableGrayOutputRequestPacket()
   : RequestPacket() {
   SetCmdString("enableGrayOutput 0");
 }
+
+EnableSafetyModeRequestPacket::EnableSafetyModeRequestPacket()
+  : RequestPacket() {
+  SetCmdString("enableFeatures 268435456");
+}
+
+DisableSafetyModeRequestPacket::DisableSafetyModeRequestPacket()
+  : RequestPacket() {
+  SetCmdString("disableFeatures 268435456");
+}
 }

@@ -419,6 +419,18 @@ struct API DisableGrayOutputRequestPacket : public RequestPacket {
 };
 
 using DisableGrayOutputResponsePacket = CommonResponsePacket;
+
+struct API EnableSafetyModeRequestPacket : public RequestPacket {
+  EnableSafetyModeRequestPacket();
+};
+
+using EnableSafetyModeResponsePacket = CommonResponsePacket;
+
+struct API DisableSafetyModeRequestPacket : public RequestPacket {
+  DisableSafetyModeRequestPacket();
+};
+
+using DisableSafetyModeResponsePacket = CommonResponsePacket;
 }
 
 #endif // PACKET_H

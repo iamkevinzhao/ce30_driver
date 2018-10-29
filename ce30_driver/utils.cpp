@@ -4,6 +4,10 @@
 #include <fstream>
 #include <iomanip>
 
+#ifdef QT5_WIDGETS_EXISTS
+#include <QSettings>
+#endif
+
 using namespace std;
 
 namespace ce30_driver {
@@ -181,6 +185,48 @@ bool DisableGrayOutput(UDPSocket &socket) {
   return false;
 }
 
+bool EnableSafetyMode(UDPSocket& socket) {
+  EnableSafetyModeRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    EnableSafetyModeResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Enable Safety Mode' Failed" << endl;
+      }
+    } else {
+      cerr << "'Enable Safety Mode' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Enable Safety Mode' Failed" << endl;
+  }
+  return false;
+}
+
+bool DisableSafetyMode(UDPSocket& socket) {
+  DisableSafetyModeRequestPacket request_packet;
+  auto diagnose = socket.SendPacket(request_packet);
+  if (diagnose == Diagnose::send_successful) {
+    DisableSafetyModeResponsePacket response_packet;
+    diagnose = socket.GetPacket(response_packet);
+    if (diagnose == Diagnose::receive_successful) {
+      if (response_packet.Successful()) {
+        return true;
+      } else {
+        cerr << "'Disable Safety Mode' Failed" << endl;
+      }
+    } else {
+      cerr << "'Disable Safety Mode' not Responding" << endl;
+    }
+  } else {
+    cerr << "Request 'Disable Safety Mode' Failed" << endl;
+  }
+  return false;
+}
+
 bool Connect(UDPSocket& socket) {
   return socket.Connect() == Diagnose::connect_successful;
 }
@@ -245,4 +291,67 @@ bool SaveImages(const string &file, const Scan &scan) {
   os.close();
   return true;
 }
+
+std::vector<int> VersionParser(string version) {
+  std::vector<int> result;
+  std::string tmp;
+  while (!version.empty()) {
+    if (version[0] == '.') {
+      int bit;
+      try {
+        bit = stoi(tmp);
+      } catch (...) {
+        result.clear();
+        return result;
+      }
+      result.push_back(bit);
+      tmp.clear();
+    } else {
+      tmp += *version.begin();
+    }
+    version.erase(version.begin());
+  }
+  if (!tmp.empty()) {
+    int bit;
+    try {
+      bit = stoi(tmp);
+    } catch (...) {
+      result.clear();
+      return result;
+    }
+    result.push_back(bit);
+  }
+  return result;
+}
+
+bool VersionGreater(const string &version, const string &minimal) {
+  if (version.empty() || minimal.empty()) {
+    return false;
+  }
+  if (version[0] != minimal[0]) {
+    return false;
+  }
+  std::string v_high(version.begin(), version.end());
+  std::string v_low(minimal.begin(), minimal.end());
+  auto high = VersionParser(v_high);
+  auto low = VersionParser(v_low);
+  if ((high.size() != 3) || (low.size() != 3)) {
+    return false;
+  }
+  return high[2] >= low[2];
+}
+
+#ifdef QT5_WIDGETS_EXISTS
+std::string DeviceConfig::kSafetyModeKey = "safety-mode";
+bool DeviceConfig::ConfigureDevice(UDPSocket& socket, const QString &ini_file) {
+  std::string version;
+  if (!GetVersion(version, socket)) {
+    return false;
+  }
+  QSettings settings(ini_file, QSettings::IniFormat);
+  if (VersionGreater(version, "d9.4.8")) {
+    auto value = settings.value(kSafetyModeKey, false).toBool();
+  }
+}
+#endif
 }

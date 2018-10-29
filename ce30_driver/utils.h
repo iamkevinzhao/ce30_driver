@@ -11,6 +11,10 @@
 #include "export.h"
 #include <sstream>
 
+#ifdef QT5_WIDGETS_EXISTS
+#include <QString>
+#endif
+
 namespace ce30_driver {
 /**
 * @brief retrieve device firmware version
@@ -89,6 +93,24 @@ bool API DisableFilter(UDPSocket& socket);
 bool API EnableGrayOutput(UDPSocket& socket);
 
 bool API DisableGrayOutput(UDPSocket& socket);
+
+bool API EnableSafetyMode(UDPSocket& socket);
+
+bool API DisableSafetyMode(UDPSocket& socket);
+
+#ifdef QT5_WIDGETS_EXISTS
+class API DeviceConfig {
+public:
+  static bool ConfigureDevice(
+      UDPSocket& socket, const QString& ini_file = "./settings.ini");
+private:
+  static std::string kSafetyModeKey;
+};
+#endif
+
+bool API VersionGreater(const std::string& version, const std::string& minimal);
+
+std::vector<int> API VersionParser(std::string version);
 
 bool API SaveImages(const std::string& file, const Scan& scan);
 
