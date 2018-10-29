@@ -3,9 +3,20 @@ add_executable(
     main.cpp
 )
 
+set(UNIX_LINKS "")
+
+if(UNIX)
+set(
+  UNIX_LINKS
+    ${UNIX_LINKS}
+    -lboost_system
+)
+endif()
+
 target_link_libraries(
   ce30_demo
     ce30_driver
+    ${UNIX_LINKS}
 )
 
 install(TARGETS ce30_demo
