@@ -11,9 +11,7 @@
 #include "export.h"
 #include <sstream>
 
-#ifdef QT5_WIDGETS_EXISTS
-#include <QString>
-#endif
+class QString;
 
 namespace ce30_driver {
 /**
@@ -98,15 +96,16 @@ bool API EnableSafetyMode(UDPSocket& socket);
 
 bool API DisableSafetyMode(UDPSocket& socket);
 
-#ifdef QT5_WIDGETS_EXISTS
 class API DeviceConfig {
 public:
-  static bool ConfigureDevice(
-      UDPSocket& socket, const QString& ini_file = "./settings.ini");
+  static bool Configure(UDPSocket &socket);
+  static bool Configure(
+      UDPSocket& socket, const QString& ini_file);
 private:
-  static std::string kSafetyModeKey;
+  static QString kSafetyModeKey;
 };
-#endif
+
+std::string TrueOrFalse(const bool& value);
 
 bool API VersionGreater(const std::string& version, const std::string& minimal);
 

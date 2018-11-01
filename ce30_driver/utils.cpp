@@ -331,8 +331,8 @@ bool VersionGreater(const string &version, const string &minimal) {
   if (version[0] != minimal[0]) {
     return false;
   }
-  std::string v_high(version.begin(), version.end());
-  std::string v_low(minimal.begin(), minimal.end());
+  std::string v_high(std::next(version.begin()), version.end());
+  std::string v_low(std::next(minimal.begin()), minimal.end());
   auto high = VersionParser(v_high);
   auto low = VersionParser(v_low);
   if ((high.size() != 3) || (low.size() != 3)) {
@@ -342,16 +342,39 @@ bool VersionGreater(const string &version, const string &minimal) {
 }
 
 #ifdef QT5_WIDGETS_EXISTS
-std::string DeviceConfig::kSafetyModeKey = "safety-mode";
-bool DeviceConfig::ConfigureDevice(UDPSocket& socket, const QString &ini_file) {
+QString DeviceConfig::kSafetyModeKey = "safety-mode";
+bool DeviceConfig::Configure(UDPSocket &socket) {
+  return Configure(socket, "./settings.ini");
+}
+
+bool DeviceConfig::Configure(UDPSocket& socket, const QString &ini_file) {
   std::string version;
   if (!GetVersion(version, socket)) {
     return false;
   }
+  int index = 0;
+  std::cout << "Setting Device:" << std::endl;
   QSettings settings(ini_file, QSettings::IniFormat);
-  if (VersionGreater(version, "d9.4.8")) {
+  if (VersionGreater(version, "d9.8.4")) {
     auto value = settings.value(kSafetyModeKey, false).toBool();
+    std::cout
+        << "  [" + std::to_string(++index) + "] "
+           "Safety Mode ...... " + TrueOrFalse(value) << std::endl;
+    if (value) {
+      if (!EnableSafetyMode(socket)) return false;
+    } else {
+      if (!DisableSafetyMode(socket)) return false;
+    }
   }
+  return true;
 }
 #endif
+
+std::string TrueOrFalse(const bool &value) {
+  if (value) {
+    return "True";
+  } else {
+    return "False";
+  }
+}
 }
